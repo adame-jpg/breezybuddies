@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- Dev-only smoke test: drives the add-to-cart flow inside an iframe and
+     reports what happened. Chrome --headless --dump-dom to read the result. -->
+<html>
+  <body>
+    <pre id="out">pending</pre>
+    <iframe id="f" width="390" height="900" style="border: 0"></iframe>
+    <script>
+      const log = [];
+      const frame = document.getElementById("f");
+      frame.src = new URLSearchParams(location.search).get("p") || "/index.html";
+
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      frame.onload = async () => {
+        const doc = frame.contentDocument;
+        const win = frame.contentWindow;
+        win.addEventListener("error", (e) => log.push(`JS ERROR: ${e.message}`));
+        await wait(900);
+
+        const add = doc.querySelector("[data-add-buddy], [data-pdp-add]");
+        log.push(`add button: ${add ? add.textContent.trim().slice(0, 24) : "MISSING"}`);
+        add?.click();
+        await wait(500);
+
+        const drawer = doc.getElementById("cart-drawer");
+        log.push(`drawer open: ${drawer && !drawer.hidden}`);
+        log.push(`badge: ${doc.querySelector("[data-cart-count]")?.textContent}`);
+        log.push(`lines: ${doc.querySelectorAll(".cart-line").length}`);
+        log.push(`subtotal: ${doc.querySelector(".cart-foot__row strong")?.textContent}`);
+        log.push(`meter: ${doc.querySelector(".meter__label span")?.textContent}`);
+        log.push(`crosssell: ${doc.querySelector(".cross__name")?.textContent}`);
+
+        doc.querySelector("[data-qty-up]")?.click();
+        await wait(300);
+        log.push(`after +1 subtotal: ${doc.querySelector(".cart-foot__row strong")?.textContent}`);
+        log.push(`after +1 meter: ${doc.querySelector(".meter__label span")?.textContent}`);
+
+        doc.querySelector("[data-checkout]")?.click();
+        await wait(300);
+        log.push(`toast: ${doc.getElementById("toast")?.textContent}`);
+
+        const langSelect = doc.querySelector("[data-lang]");
+        if (langSelect) {
+          langSelect.value = "nl";
+          langSelect.dispatchEvent(new win.Event("change", { bubbles: true }));
+          await wait(600);
+          log.push(`after nl: h1="${doc.querySelector("h1")?.textContent.trim()}"`);
+          log.push(`after nl: nav="${doc.querySelector(".header__nav a")?.textContent.trim()}"`);
+          log.push(`after nl: cart badge=${doc.querySelector("[data-cart-count]")?.textContent}`);
+        }
+
+        const marketSelect = doc.querySelector("[data-market]");
+        if (marketSelect) {
+          marketSelect.value = "US";
+          marketSelect.dispatchEvent(new win.Event("change", { bubbles: true }));
+          await wait(600);
+          log.push(`after US: price="${doc.querySelector(".card__price, .pdp__price strong")?.textContent}"`);
+          log.push(`after US: h1="${doc.querySelector("h1")?.textContent.trim().slice(0, 40)}"`);
+        }
+
+        document.getElementById("out").textContent = log.join("\n");
+      };
+    </script>
+  </body>
+</html>

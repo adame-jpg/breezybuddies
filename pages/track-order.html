@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff8ee" />
+    <title>Track your order | BreezyBuddies</title>
+    <meta name="description" content="Follow your BreezyBuddies parcel." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://breezybuddies.com/pages/track-order.html" />
+    <link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="../assets/css/tokens.css" />
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+  </head>
+
+  <body data-page="static">
+    <a class="skip" href="#main" data-i18n="a11y.skip">Skip to content</a>
+    <div id="site-header"></div>
+
+    <main id="main" class="doc">
+      <div class="wrap wrap--narrow">
+        <a class="doc__back" href="../index.html" data-i18n="page.back">Back to shop</a>
+        <h1>Track your order</h1>
+
+        <p>Enter the order number from your confirmation email and we will show the latest carrier
+          scan.</p>
+
+        <form class="news__form" style="margin-inline:0" onsubmit="event.preventDefault();
+             this.nextElementSibling.hidden = false;">
+          <label class="visually-hidden" for="order-no">Order number</label>
+          <input id="order-no" type="text" name="order" placeholder="BB-12345" autocomplete="off" />
+          <button type="submit" class="btn btn--primary btn--lg">Track</button>
+        </form>
+        <p class="doc__draft" hidden>
+          Tracking is not connected in this preview. On the live shop this form talks to the carrier
+          lookup of the commerce platform.
+        </p>
+
+        <h2>No confirmation email?</h2>
+        <p>Check your spam folder, then email
+          <a href="mailto:hello@breezybuddies.com">hello@breezybuddies.com</a> and we will resend it.</p>
+      </div>
+
+    </main>
+
+    <footer class="footer" id="site-footer"></footer>
+    <script type="module" src="../assets/js/app.js"></script>
+  </body>
+</html>

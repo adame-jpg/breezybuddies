@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /pages/launch-checklist.html
+Disallow: /reference/
+Disallow: /tools/
+
+Sitemap: https://breezybuddies.com/sitemap.xml

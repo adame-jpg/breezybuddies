@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- Dev-only: renders a page inside a fixed-width iframe so headless
+     screenshots reflect a real viewport width. ?p=/index.html&w=390&h=6000 -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #999;
+      }
+      iframe {
+        display: block;
+        border: 0;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const q = new URLSearchParams(location.search);
+      const frame = document.createElement("iframe");
+      frame.width = q.get("w") || "390";
+      frame.height = q.get("h") || "6000";
+      frame.src = q.get("p") || "/index.html";
+      document.body.append(frame);
+    </script>
+  </body>
+</html>

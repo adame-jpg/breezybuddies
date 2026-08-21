@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Dev-only inspector: loads a page in a fixed-width iframe and dumps section
+     geometry, opacity and overflow offenders. Use with Chrome --dump-dom. -->
+<html>
+  <body>
+    <div id="out">pending</div>
+    <iframe id="f" style="border: 0"></iframe>
+    <script>
+      const q = new URLSearchParams(location.search);
+      const frame = document.getElementById("f");
+      frame.width = q.get("w") || "390";
+      frame.height = q.get("h") || "900";
+      frame.src = q.get("p") || "/index.html";
+      frame.onload = () => {
+        setTimeout(() => {
+          const doc = frame.contentDocument;
+          const win = frame.contentWindow;
+          const rows = [...doc.querySelectorAll("main > section, main > .wrap, footer, #site-header")].map(
+            (el) => {
+              const r = el.getBoundingClientRect();
+              const kid = el.querySelector("[data-reveal]");
+              return `${el.id || el.className}: top=${Math.round(r.top + win.scrollY)} h=${Math.round(
+                r.height
+              )} kids=${el.children.length} revealOpacity=${
+                kid ? getComputedStyle(kid).opacity : "-"
+              }`;
+            }
+          );
+          const wide = [...doc.querySelectorAll("*")]
+            .filter((el) => el.getBoundingClientRect().right > win.innerWidth + 1)
+            .filter((el) => !el.closest(".reel, .gal, .swatches, .hero, .gal__thumbs"))
+            .map((el) => `${el.tagName}.${el.className}[${Math.round(el.getBoundingClientRect().right)}]`);
+          document.getElementById("out").textContent =
+            `vw=${win.innerWidth} scrollW=${doc.documentElement.scrollWidth} docH=${doc.documentElement.scrollHeight}\n` +
+            rows.join("\n") +
+            "\nOVERFLOW: " +
+            (wide.slice(0, 12).join(" | ") || "none");
+        }, 1500);
+      };
+    </script>
+  </body>
+</html>
