@@ -28,6 +28,7 @@ SHELL = """<!doctype html>
     <link rel="stylesheet" href="../assets/css/tokens.css" />
     <link rel="stylesheet" href="../assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/pop.css" />
   </head>
 
   <body data-page="{page}">

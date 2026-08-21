@@ -209,12 +209,13 @@ const renderForm = () => {
 
 /* ------------------------------------------------------------- explainer */
 
-const marker = (x, y, n) => `
-  <g>
-    <circle cx="${x}" cy="${y}" r="11" fill="var(--ink)"/>
-    <text x="${x}" y="${y + 4}" text-anchor="middle" font-size="12" font-weight="800"
-          fill="#fff">${n}</text>
-  </g>`;
+/* Markers sit on the render itself, so the attachment is shown rather than
+   drawn: 1 = the drink, 2 = paws on the rim, 3 = the body staying outside. */
+const HOTSPOTS = [
+  { n: 1, x: 58, y: 62 },
+  { n: 2, x: 27, y: 37 },
+  { n: 3, x: 12, y: 21 },
+];
 
 export const renderExplainer = () => `
   <div class="wrap">
@@ -225,35 +226,20 @@ export const renderExplainer = () => `
         <p class="explain__body">${t("pdp.explain.body")}</p>
       </div>
       <figure class="explain__figure">
-        <svg viewBox="0 0 320 214" role="img" aria-label="${t("pdp.explain.body")}">
-          <ellipse cx="150" cy="192" rx="112" ry="10" fill="var(--warm)"/>
-
-          <path d="M78 84h96v76a20 20 0 0 1-20 20H98a20 20 0 0 1-20-20z"
-                fill="var(--white)" stroke="var(--line-strong)" stroke-width="3"/>
-          <path d="M78 106H62a19 19 0 0 0 0 38h16" fill="none"
-                stroke="var(--line-strong)" stroke-width="3"/>
-          <ellipse cx="126" cy="84" rx="48" ry="11" fill="var(--coral-soft)"
-                   stroke="var(--line-strong)" stroke-width="3"/>
-
-          <g fill="var(--mint)" stroke="var(--white)" stroke-width="2">
-            <ellipse cx="190" cy="58" rx="9" ry="12" transform="rotate(-20 190 58)"/>
-            <ellipse cx="226" cy="58" rx="9" ry="12" transform="rotate(20 226 58)"/>
-            <rect x="184" y="88" width="48" height="62" rx="22"/>
-            <circle cx="208" cy="78" r="27"/>
-            <rect x="158" y="76" width="36" height="13" rx="6.5"/>
-            <ellipse cx="184" cy="82" rx="9" ry="7"/>
-          </g>
-          <circle cx="180" cy="82" r="2.6" fill="var(--ink)" opacity=".35"/>
-
-          <g stroke="var(--mint)" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8">
-            <path d="M172 88c-12 5-22 10-30 15"/>
-            <path d="M174 96c-14 3-24 7-32 12"/>
-          </g>
-
-          ${marker(246, 128, 3)}
-          ${marker(176, 52, 2)}
-          ${marker(104, 84, 1)}
-        </svg>
+        <div class="explain__shot">
+          ${picture({
+            src: asset("assets/img/products/on-mug"),
+            alt: t("pdp.explain.body"),
+            widths: [600, 1200],
+            sizes: "(min-width: 900px) 520px, 92vw",
+            width: 600,
+            height: 600,
+          })}
+          ${HOTSPOTS.map(
+            (spot) =>
+              `<span class="explain__pin" style="left:${spot.x}%;top:${spot.y}%" aria-hidden="true">${spot.n}</span>`
+          ).join("")}
+        </div>
         <figcaption class="explain__legend">
           <ol>
             <li><span>1</span>${t("pdp.diagram.drink")}</li>

@@ -8,6 +8,7 @@
     "dev": "npx --yes serve . --listen 4321",
     "deploy": "npx --yes vercel --prod",
     "deploy:preview": "npx --yes vercel",
+    "cutouts": "python3 tools/cutout.py",
     "images": "python3 tools/build-images.py",
     "pages": "python3 tools/build-pages.py",
     "check": "node tools/check.mjs"

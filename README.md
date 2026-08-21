@@ -56,7 +56,8 @@ de code opvraagt echt bestaat, en of geen enkele interne link kapot is.
 index.html                homepage
 product.html              productpagina
 pages/                    beleid + support (gegenereerd via tools/build-pages.py)
-assets/css/               tokens.css (design tokens), base.css, components.css
+assets/css/               tokens.css (design tokens), base.css, components.css,
+                          pop.css (de 3D/kleur-laag, laadt als laatste)
 assets/js/config.js       alle zakelijke instellingen + TODO's
 assets/js/catalog.js      producten, bundels, FAQ, reviews
 assets/js/i18n.js         de vijf talen
@@ -100,9 +101,14 @@ Alles staat op `pages/launch-checklist.html` (niet gelinkt vanaf de winkel, en
 De bronbestanden staan buiten deze repo. Na het vervangen van de bronnen:
 
 ```sh
+npm run cutouts  # karakters vrijstaand maken (transparante achtergrond)
 npm run images   # webp + jpg in meerdere breedtes
 npm run pages    # beleidspagina's opnieuw uitschrijven
 ```
+
+`cutouts` moet vóór `images` draaien: de zes karakterkaarten gebruiken de
+vrijstaande versies, zodat de gekleurde kaartachtergrond er doorheen loopt
+zonder de kleur van het product zelf te veranderen.
 
 ## Later naar Shopify of WooCommerce
 

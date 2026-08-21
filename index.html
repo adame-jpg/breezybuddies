@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="assets/css/tokens.css" />
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pop.css" />
 
     <script type="application/ld+json">
       {
@@ -88,6 +89,23 @@
 
           <div class="hero__media">
             <picture>
+              <source
+                type="image/webp"
+                media="(max-width: 639px)"
+                srcset="
+                  assets/img/lifestyle/hero-mobile-560.webp 560w,
+                  assets/img/lifestyle/hero-mobile.webp     900w
+                "
+                sizes="100vw"
+              />
+              <source
+                media="(max-width: 639px)"
+                srcset="
+                  assets/img/lifestyle/hero-mobile-560.jpg 560w,
+                  assets/img/lifestyle/hero-mobile.jpg     900w
+                "
+                sizes="100vw"
+              />
               <source
                 type="image/webp"
                 srcset="

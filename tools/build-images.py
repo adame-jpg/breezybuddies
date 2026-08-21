@@ -16,20 +16,21 @@ OUT = Path(__file__).resolve().parent.parent / "assets/img"
 
 # source stem -> (destination folder, destination stem, widths)
 JOBS = [
-    ("buddy2-elephant", "products", "buddy-elephant", (900, 450)),
-    ("buddy2-cat", "products", "buddy-cat", (900, 450)),
-    ("buddy2-dog", "products", "buddy-dog", (900, 450)),
-    ("buddy2-dino-mint", "products", "buddy-dino-mint", (900, 450)),
-    ("buddy2-dino-grape", "products", "buddy-dino-grape", (900, 450)),
-    ("buddy2-bear", "products", "buddy-bear", (900, 450)),
-    ("product-on-mug", "products", "on-mug", (1000, 500)),
+    ("cut-buddy2-elephant", "products", "buddy-elephant", (900, 450)),
+    ("cut-buddy2-cat", "products", "buddy-cat", (900, 450)),
+    ("cut-buddy2-dog", "products", "buddy-dog", (900, 450)),
+    ("cut-buddy2-dino-mint", "products", "buddy-dino-mint", (900, 450)),
+    ("cut-buddy2-dino-grape", "products", "buddy-dino-grape", (900, 450)),
+    ("cut-buddy2-bear", "products", "buddy-bear", (900, 450)),
+    ("hero3d-closeup", "products", "on-mug", (1200, 600)),
     ("detail-charging", "products", "detail-charging", (1000, 500)),
     ("collection-lineup", "brand", "lineup", (1600, 800)),
-    ("hero-afterschool", "lifestyle", "hero-afterschool", (1800, 1100, 700)),
-    ("lifestyle-family", "lifestyle", "family-tea", (1400, 700)),
-    ("ugc-soup", "ugc", "soup", (720, 420)),
-    ("ugc-hotchocolate", "ugc", "hot-chocolate", (720, 420)),
-    ("ugc-breakfast", "ugc", "breakfast", (720, 420)),
+    ("hero3d-desktop", "lifestyle", "hero-afterschool", (1800, 1100, 700)),
+    ("hero3d-mobile", "lifestyle", "hero-mobile", (900, 560)),
+    ("family3d", "lifestyle", "family-tea", (1400, 700)),
+    ("ugc3d-soup", "ugc", "soup", (720, 420)),
+    ("ugc3d-cocoa", "ugc", "hot-chocolate", (720, 420)),
+    ("ugc3d-breakfast", "ugc", "breakfast", (720, 420)),
 ]
 
 
@@ -40,7 +41,10 @@ def emit(img: Image.Image, folder: str, stem: str, width: int, is_widest: bool) 
     target_dir.mkdir(parents=True, exist_ok=True)
     suffix = "" if is_widest else f"-{width}"
     resized.save(target_dir / f"{stem}{suffix}.webp", "WEBP", quality=82, method=6)
-    resized.convert("RGB").save(
+    # JPEG cannot hold the cutout alpha, so the fallback gets a cream backing.
+    flat = Image.new("RGBA", resized.size, (255, 248, 238, 255))
+    flat.alpha_composite(resized)
+    flat.convert("RGB").save(
         target_dir / f"{stem}{suffix}.jpg", "JPEG", quality=84, optimize=True, progressive=True
     )
 
