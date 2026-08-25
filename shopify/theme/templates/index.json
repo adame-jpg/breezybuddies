@@ -1,0 +1,14 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "bb_landing": {
+      "type": "bb-landing",
+      "settings": {}
+    }
+  },
+  "order": ["bb_landing"]
+}

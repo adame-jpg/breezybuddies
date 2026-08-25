@@ -1,0 +1,200 @@
+/* Shopify bridge — keep mockup look, tame Horizon chrome */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream, #fff8ee) !important;
+  font-family: var(--font-body, "Nunito Sans", system-ui, sans-serif) !important;
+  color: var(--ink, #28252d) !important;
+}
+
+.bb-site {
+  --header-h: 0px;
+  overflow-x: clip;
+}
+
+.bb-site a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Hide default Horizon homepage chrome when our landing is present */
+body:has(.bb-site) .page-wrapper > #header-group,
+body:has(.bb-site) .shopify-section-group-header-group,
+body:has(.bb-site) #shopify-section-sections--header-group,
+body:has(.bb-site) .shopify-section-group-footer-group,
+body:has(.bb-site) footer:not(.bb-footer),
+body:has(.bb-site) .shopify-section-group-header-group + * .announcement-bar {
+  display: none !important;
+}
+
+body:has(.bb-site) #MainContent {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.bb-announce {
+  background: linear-gradient(90deg, #ff6b8a, #a78bfa, #7ddbd0);
+  color: #fff;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 1rem;
+}
+
+.bb-announce__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.bb-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 248, 238, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line, #ece0d3);
+}
+
+.bb-nav__inner {
+  max-width: var(--wrap, 1280px);
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bb-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display, "Baloo 2", sans-serif);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.bb-nav__brand img {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: var(--shadow-sm);
+}
+
+.bb-nav__links {
+  display: none;
+  gap: 1.25rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.bb-nav__links a:hover {
+  color: var(--coral);
+}
+
+.bb-nav__cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 900px) {
+  .bb-nav__links {
+    display: flex;
+  }
+}
+
+.bb-footer {
+  background: #28252d;
+  color: #f7eadd;
+  padding: 3rem 1.25rem 2rem;
+  margin-top: 0;
+}
+
+.bb-footer__inner {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+}
+
+.bb-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.bb-footer__brand img {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+}
+
+.bb-footer p {
+  color: #cbbfb0;
+  max-width: 36ch;
+  line-height: 1.55;
+}
+
+.bb-footer__cols {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.bb-footer h4 {
+  font-family: var(--font-display);
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+}
+
+.bb-footer a {
+  display: block;
+  color: #cbbfb0;
+  margin: 0.35rem 0;
+  font-size: 0.92rem;
+}
+
+.bb-footer a:hover {
+  color: #fff;
+}
+
+.bb-footer__copy {
+  border-top: 1px solid #3d3844;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  font-size: 0.85rem;
+  color: #9a9086;
+}
+
+/* Product card ATC uses forms */
+.bb-site .card form {
+  margin: 0;
+}
+
+.bb-site .card .btn--primary {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+}

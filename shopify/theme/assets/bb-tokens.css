@@ -1,0 +1,64 @@
+/* BreezyBuddies design tokens */
+:root {
+  /* Brand */
+  --coral: #ff6b8a;
+  --coral-dark: #eb4f71;
+  --coral-soft: #ffe3ea;
+  --mint: #7ddbd0;
+  --mint-soft: #e2f7f4;
+  --yellow: #ffd85a;
+  --yellow-soft: #fff4d0;
+  --purple: #a78bfa;
+  --purple-soft: #ede7ff;
+  --green: #8ed081;
+  --green-soft: #e7f5e3;
+
+  /* Surfaces */
+  --cream: #fff8ee;
+  --warm: #f7eadd;
+  --white: #fff;
+  --ink: #28252d;
+  --ink-soft: #6f6875;
+  --line: #ece0d3;
+  --line-strong: #ddcdba;
+
+  /* Type */
+  --font-display: "Baloo 2", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.88rem);
+  --step-0: clamp(0.98rem, 0.95rem + 0.15vw, 1.06rem);
+  --step-1: clamp(1.13rem, 1.05rem + 0.35vw, 1.3rem);
+  --step-2: clamp(1.35rem, 1.2rem + 0.7vw, 1.75rem);
+  --step-3: clamp(1.7rem, 1.4rem + 1.4vw, 2.5rem);
+  --step-4: clamp(2.1rem, 1.6rem + 2.4vw, 3.5rem);
+
+  /* Space */
+  --gap-xs: 0.5rem;
+  --gap-sm: 0.85rem;
+  --gap: 1.25rem;
+  --gap-md: 2rem;
+  --gap-lg: 3.25rem;
+  --gap-xl: clamp(3.5rem, 7vw, 6rem);
+
+  /* Shape */
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+  --pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgb(40 37 45 / 6%);
+  --shadow: 0 10px 28px -14px rgb(40 37 45 / 22%);
+  --shadow-lg: 0 26px 60px -28px rgb(40 37 45 / 30%);
+
+  --wrap: 1280px;
+  --header-h: 64px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 900px) {
+  :root {
+    --header-h: 76px;
+  }
+}

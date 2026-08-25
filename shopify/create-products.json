@@ -1,0 +1,69 @@
+{
+  "products": [
+    {
+      "title": "Breezy Buddy — Cat Food Cooler",
+      "handle": "breezy-buddy-cat",
+      "vendor": "BreezyBuddies",
+      "productType": "Food Coolers",
+      "tags": ["hero", "cat", "kids", "usb", "food-cooler"],
+      "ali": "https://www.aliexpress.com/item/1005012680932011.html",
+      "cost_usd": 7.69,
+      "price": "24.99",
+      "compare": "39.99",
+      "image": "https://ae01.alicdn.com/kf/S3a9d0dd16f0c4246bbe50ac96ff3edfde.jpg",
+      "body": "<p>Meet your mealtime sidekick. This adorable cat hangs on the rim of a mug or bowl and gently blows so kids (and parents) don't have to.</p><ul><li>Cools hot drinks &amp; food in ~3 minutes</li><li>Clips onto cups &amp; bowls (≈2–6 mm rim)</li><li>USB rechargeable · quiet fan</li><li>Food-safe outer shell · easy to wipe clean</li><li>Perfect kids gift · cartoon character vibe</li></ul>"
+    },
+    {
+      "title": "Breezy Buddy — Frog Food Cooler",
+      "handle": "breezy-buddy-frog",
+      "vendor": "BreezyBuddies",
+      "productType": "Food Coolers",
+      "tags": ["frog", "kids", "usb", "food-cooler"],
+      "ali": "https://www.aliexpress.com/item/1005012906332271.html",
+      "cost_usd": 4.94,
+      "price": "22.99",
+      "compare": "34.99",
+      "image": "https://ae01.alicdn.com/kf/S2e3b0e3eb9ca4875a626cc20f96ce35fO.jpg",
+      "body": "<p>A cheeky frog that blows the heat away. Clip it on noodles, soup, or cocoa — sip-safe fun for little ones.</p><ul><li>USB rechargeable mini blower</li><li>Hangs on cups &amp; bowls</li><li>Quiet · kid-friendly cartoon design</li><li>Great for hot drinks, noodles &amp; meals</li></ul>"
+    },
+    {
+      "title": "Breezy Buddy — Elephant &amp; Dino Cooler",
+      "handle": "breezy-buddy-elephant-dino",
+      "vendor": "BreezyBuddies",
+      "productType": "Food Coolers",
+      "tags": ["elephant", "dinosaur", "kids", "usb", "food-cooler"],
+      "ali": "https://www.aliexpress.com/item/1005012731344927.html",
+      "cost_usd": 9.22,
+      "price": "26.99",
+      "compare": "42.99",
+      "image": "https://ae01.alicdn.com/kf/S18924aea12dd4ab7851403bd0e1fdb8eB.png",
+      "body": "<p>Pick elephant or dino — 3-speed adjustable food cooler that hangs on the cup so mealtime stays fun and burn-free.</p><ul><li>3 speeds · low noise</li><li>Hands-free cup hanging design</li><li>Safe materials for family tables</li><li>Ideal for kids who hate waiting on hot food</li></ul>"
+    },
+    {
+      "title": "Breezy Buddy — Animal Cooler (Assorted)",
+      "handle": "breezy-buddy-animal-assorted",
+      "vendor": "BreezyBuddies",
+      "productType": "Food Coolers",
+      "tags": ["assorted", "kids", "usb", "food-cooler", "bestseller"],
+      "ali": "https://www.aliexpress.com/item/1005012775612471.html",
+      "cost_usd": 5.84,
+      "price": "23.99",
+      "compare": "36.99",
+      "image": "https://ae01.alicdn.com/kf/S89ed98bba4c5459e92745cdfb30bc50eG.jpg",
+      "body": "<p>Cute animal mini fans that hang on the cup and blow cool air over hot water, tea, rice, coffee &amp; dishes.</p><ul><li>Portable hanging cup ornament blower</li><li>USB powered cooling</li><li>Collect the whole crew</li></ul>"
+    },
+    {
+      "title": "Breezy Buddy — Baby Meal Cooler Fan",
+      "handle": "breezy-buddy-baby-meal",
+      "vendor": "BreezyBuddies",
+      "productType": "Food Coolers",
+      "tags": ["baby", "parents", "usb", "food-cooler"],
+      "ali": "https://www.aliexpress.com/item/1005012731610339.html",
+      "cost_usd": 9.28,
+      "price": "27.99",
+      "compare": "44.99",
+      "image": "https://ae01.alicdn.com/kf/S5dd638e6cde24a21aed980605e176ce3f.png",
+      "body": "<p>Parents' hack: cool baby meals faster without blowing yourself. 3-speed cup-hanging cartoon cooler, rechargeable &amp; quiet.</p><ul><li>3-speed adjustable</li><li>Cup hanging · portable</li><li>Low noise for calm mealtimes</li></ul>"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+handle,name,family,animal,sell_eur,aliexpress_url,notes
+mochi,Mochi Cat,pets,cat,19.95,https://www.aliexpress.com/item/1005012680932011.html,Classic clip buddy
+coco,Coco Pup,pets,dog,19.95,https://www.aliexpress.com/item/1005012768339991.html,Same family as elephant listing (animal variants)
+ellie,Ellie Elephant,zoo,elephant,19.95,https://www.aliexpress.com/item/1005012768339991.html,Isa link — multi-color elephant clip
+mango,Mango Monkey,zoo,monkey,19.95,https://www.aliexpress.com/item/1005012797801305.html,Pick monkey variant from multi-animal listing
+chili,Chili Red Panda,zoo,red-panda,19.95,https://www.aliexpress.com/item/1005012797801305.html,Pick red panda / fox-like variant if available
+bao,Bao Panda,zoo,panda,19.95,https://www.aliexpress.com/item/1005012797801305.html,Black/white panda variant
+dino-mint,Dino Mint,dinos,dino-green,19.95,https://www.aliexpress.com/item/1005012754690777.html,Green dino + elephant listing
+dino-grape,Dino Grape,dinos,dino-purple,19.95,https://www.aliexpress.com/item/1005012754690777.html,Purple dino variant
+flip,Flip Frog,cartoons,frog,19.95,https://www.aliexpress.com/item/1005012905772511.html,Isa frog link
+blossom,Blossom Bunny,cartoons,bunny-pink,19.95,https://www.aliexpress.com/item/1005012680932011.html,Pink cartoon — confirm bunny/pink variant on listing
+plum,Plum Kitty,cartoons,cat-purple,19.95,https://www.aliexpress.com/item/1005012451454105.html,OPTIONAL family B (3-speed) — keep draft until decided
+
+# NOT in core line (different product body)
+# plum-pro / mochi-pro,3-Speed Cat Pro,premium,cat,24.95,https://www.aliexpress.com/item/1005012451454105.html,Family B — separate later
