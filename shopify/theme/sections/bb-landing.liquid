@@ -2,57 +2,59 @@
 {{ 'bb-base.css' | asset_url | stylesheet_tag }}
 {{ 'bb-components.css' | asset_url | stylesheet_tag }}
 {{ 'bb-pop.css' | asset_url | stylesheet_tag }}
+{{ 'bb-commerce.css' | asset_url | stylesheet_tag }}
 {{ 'bb-shopify.css' | asset_url | stylesheet_tag }}
 
-<div class="bb-site">
+{% render 'bb-characters-json' %}
+
+<div class="bb-site" lang="{{ localization.language.iso_code }}">
   <div class="bb-announce">
     <div class="bb-announce__inner">
-      <span>Free shipping on 2+ buddies</span>
-      <span>Worldwide delivery</span>
-      <span>30-day returns</span>
+      <span>{{ 'bb.announce.shipping' | t }}</span>
+      <span>{{ 'bb.announce.worldwide' | t }}</span>
+      <span>{{ 'bb.announce.returns' | t }}</span>
     </div>
   </div>
 
   <header class="bb-nav">
     <div class="bb-nav__inner">
       <a class="bb-nav__brand" href="{{ routes.root_url }}">
-        <img src="{{ 'bb-logo-circle.png' | asset_url }}" width="42" height="42" alt="BreezyBuddies">
-        BreezyBuddies
+        <img src="{{ 'bb-logo-circle.png' | asset_url }}" width="42" height="42" alt="{{ 'bb.brand' | t }}">
+        {{ 'bb.brand' | t }}
       </a>
-      <nav class="bb-nav__links" aria-label="Primary">
-        <a href="#shop">Shop</a>
-        <a href="#how">How it works</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#faq">FAQ</a>
+      <nav class="bb-nav__links" aria-label="{{ 'bb.nav.primary' | t }}">
+        <a href="#shop">{{ 'bb.nav.shop' | t }}</a>
+        <a href="#how">{{ 'bb.nav.how' | t }}</a>
+        <a href="#reviews">{{ 'bb.nav.reviews' | t }}</a>
+        <a href="#faq">{{ 'bb.nav.faq' | t }}</a>
       </nav>
-      <a class="bb-nav__cart" href="{{ routes.cart_url }}">
-        Cart
-        <span>({{ cart.item_count }})</span>
-      </a>
+      <div class="bb-nav__actions">
+        <button type="button" class="bb-nav__cart-btn" data-bb-open-cart>
+          {{ 'bb.nav.cart' | t }}
+          <span class="bb-nav__cart-count" data-bb-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
       <span class="puff puff--1" aria-hidden="true"></span>
       <span class="puff puff--2" aria-hidden="true"></span>
       <span class="puff puff--3" aria-hidden="true"></span>
       <div class="wrap hero__grid">
         <div class="hero__copy">
-          <p class="hero__eyebrow">Little breeze. Big smiles.</p>
-          <h1 class="hero__title">Make every sip a little more fun.</h1>
-          <p class="hero__sub">
-            Meet the tiny buddy that brings a playful breeze to warm drinks and meals.
-          </p>
+          <p class="hero__eyebrow eyebrow">{{ 'bb.hero.eyebrow' | t }}</p>
+          <h1 class="hero__title">{{ 'bb.hero.title' | t }}</h1>
+          <p class="hero__sub">{{ 'bb.hero.sub' | t }}</p>
           <div class="hero__ctas">
-            <a class="btn btn--primary btn--lg" href="#shop">Choose your buddy</a>
-            <a class="btn btn--soft btn--lg" href="#how">See how it works</a>
+            <a class="btn btn--primary btn--lg" href="#shop">{{ 'bb.hero.cta_shop' | t }}</a>
+            <a class="btn btn--soft btn--lg" href="#how">{{ 'bb.hero.cta_how' | t }}</a>
           </div>
           <ul class="hero__trust">
-            <li>★ Loved by families</li>
-            <li>Gift-ready</li>
-            <li>10 characters</li>
+            <li>★ {{ 'bb.hero.trust_loved' | t }}</li>
+            <li>{{ 'bb.hero.trust_gift' | t }}</li>
+            <li>{{ 'bb.hero.trust_chars' | t }}</li>
           </ul>
         </div>
         <div class="hero__media">
@@ -62,7 +64,7 @@
               src="{{ 'bb-hero.webp' | asset_url }}"
               width="1100"
               height="733"
-              alt="Kids at the kitchen table with BreezyBuddies clipped on their mugs"
+              alt="{{ 'bb.hero.image_alt' | t }}"
               fetchpriority="high"
             >
           </picture>
@@ -70,82 +72,97 @@
       </div>
     </section>
 
-    <!-- HOW -->
-    <section class="section section--white" id="how">
+    <section class="section section--cream" id="how">
       <div class="wrap">
-        <header class="sec-head">
-          <h2 class="sec-title">How it works</h2>
-          <p class="sec-sub">Three seconds. No instructions needed.</p>
-        </header>
-        <ol class="steps">
-          <li class="step">
-            <span class="step__num">1</span>
-            <h3 class="step__title">Clip your buddy on</h3>
-            <p class="step__body">It hooks onto the edge of a mug or bowl. Body outside, paws over the rim.</p>
-          </li>
-          <li class="step">
-            <span class="step__num">2</span>
-            <h3 class="step__title">Point it at the drink</h3>
-            <p class="step__body">Turn the little face towards the tea, cocoa or soup.</p>
-          </li>
-          <li class="step">
-            <span class="step__num">3</span>
-            <h3 class="step__title">Let the breeze do its thing</h3>
-            <p class="step__body">A soft stream of air moves across the surface while you wait.</p>
-          </li>
-        </ol>
+        <div class="bb-section-shell">
+          <header class="sec-head">
+            <h2 class="sec-title">{{ 'bb.how.title' | t }}</h2>
+            <p class="sec-sub">{{ 'bb.how.sub' | t }}</p>
+          </header>
+          <ol class="bb-steps">
+            <li class="bb-step">
+              <span class="bb-step__num bb-step__num--mint">1</span>
+              <h3 class="bb-step__title">{{ 'bb.how.step1_title' | t }}</h3>
+              <p class="bb-step__body">{{ 'bb.how.step1_body' | t }}</p>
+            </li>
+            <li class="bb-step">
+              <span class="bb-step__num bb-step__num--yellow">2</span>
+              <h3 class="bb-step__title">{{ 'bb.how.step2_title' | t }}</h3>
+              <p class="bb-step__body">{{ 'bb.how.step2_body' | t }}</p>
+            </li>
+            <li class="bb-step">
+              <span class="bb-step__num bb-step__num--coral">3</span>
+              <h3 class="bb-step__title">{{ 'bb.how.step3_title' | t }}</h3>
+              <p class="bb-step__body">{{ 'bb.how.step3_body' | t }}</p>
+            </li>
+          </ol>
+        </div>
       </div>
     </section>
 
-    <!-- SHOP -->
     <section class="section section--cream" id="shop">
       <div class="wrap">
         <header class="sec-head">
-          <h2 class="sec-title">Shop your buddy</h2>
-          <p class="sec-sub">Pets · Zoo · Dinos · Cartoons — same little breeze.</p>
+          <h2 class="sec-title">{{ 'bb.shop.title' | t }}</h2>
+          <p class="sec-sub">{{ 'bb.shop.sub' | t }}</p>
         </header>
 
         {% liquid
           assign all_handles = 'mochi,coco,ellie,mango,chili,bao,dino-mint,dino-grape,flip,blossom' | split: ','
           assign all_names = 'Mochi Cat,Coco Pup,Ellie Elephant,Mango Monkey,Chili Red Panda,Bao Panda,Dino Mint,Dino Grape,Flip Frog,Blossom Bunny' | split: ','
-          assign all_animals = 'CAT,DOG,ELEPHANT,MONKEY,RED PANDA,PANDA,DINO,DINO,FROG,BUNNY' | split: ','
+          assign all_animal_keys = 'cat,dog,elephant,monkey,red_panda,panda,dino,dino,frog,bunny' | split: ','
           assign all_accents = '#ffd85a,#f5a54a,#7ddbd0,#ff6b8a,#ff8a5b,#e8e0d5,#8ed081,#a78bfa,#8CC63F,#E95E8A' | split: ','
           assign all_softs = '#fff4d0,#ffeed8,#e2f7f4,#ffe3ea,#ffe8de,#f5f1ea,#e7f5e3,#ede7ff,#e9f6d8,#ffe3ea' | split: ','
           assign all_imgs = 'bb-mochi.webp,bb-coco.webp,bb-ellie.webp,bb-coco.webp,bb-ellie.webp,bb-ellie.webp,bb-dino-mint.webp,bb-dino-grape.webp,bb-dino-mint.webp,bb-mochi.webp' | split: ','
-          assign all_badges = ', ,Most picked,New,New, , ,New,New,New' | split: ','
-          assign all_groups = 'Pets,Pets,Zoo,Zoo,Zoo,Zoo,Dinos,Dinos,Cartoons,Cartoons' | split: ','
+          assign all_badge_keys = ', ,most_picked,new,new, , ,new,new,new' | split: ','
+          assign all_groups = 'pets,pets,zoo,zoo,zoo,zoo,dinos,dinos,cartoons,cartoons' | split: ','
+          assign groups = 'pets,zoo,dinos,cartoons' | split: ','
         %}
 
-        {% assign groups = 'Pets,Zoo,Dinos,Cartoons' | split: ',' %}
         {% for group in groups %}
-          <h3 class="sec-title" style="font-size:1.45rem;margin:2rem 0 1rem;">{{ group }}</h3>
-          <div class="grid-cards" style="margin-bottom:1.5rem;">
+          {% assign group_key = 'bb.groups.' | append: group %}
+          <h3 class="bb-group-title eyebrow">{{ group_key | t }}</h3>
+          <div class="grid-cards bb-savor-grid category-grid">
             {% for handle in all_handles %}
               {% assign i = forloop.index0 %}
               {% if all_groups[i] != group %}{% continue %}{% endif %}
               {% assign product = all_products[handle] %}
               {% assign accent = all_accents[i] %}
               {% assign soft = all_softs[i] %}
-              {% assign badge = all_badges[i] | strip %}
-              <article class="card" style="--accent:{{ accent }};--accent-soft:{{ soft }}">
+              {% assign badge_key = all_badge_keys[i] | strip %}
+              {% assign animal_key = 'bb.animals.' | append: all_animal_keys[i] %}
+              {% assign name = all_names[i] %}
+              {% if product != blank %}{% assign name = product.title %}{% endif %}
+              <article class="card bb-savor-card" style="--accent:{{ accent }};--accent-soft:{{ soft }}" data-bb-pick="{{ handle }}">
                 <a class="card__media" href="{% if product != blank %}{{ product.url }}{% else %}#shop{% endif %}">
-                  {% if badge != blank %}<span class="card__badge">{{ badge }}</span>{% endif %}
-                  {% if product != blank and product.featured_image %}
-                    <img src="{{ product.featured_image | image_url: width: 600 }}" width="450" height="450" alt="{{ all_names[i] }}" loading="lazy">
-                  {% else %}
-                    <img src="{{ all_imgs[i] | asset_url }}" width="450" height="450" alt="{{ all_names[i] }}" loading="lazy">
+                  {% if badge_key != blank %}
+                    {% assign badge_t = 'bb.badges.' | append: badge_key %}
+                    <span class="card__badge">{{ badge_t | t }}</span>
                   {% endif %}
+                  {% if product != blank and product.featured_image %}
+                    <img src="{{ product.featured_image | image_url: width: 600 }}" width="450" height="450" alt="{{ name | escape }}" loading="lazy">
+                  {% else %}
+                    <img src="{{ all_imgs[i] | asset_url }}" width="450" height="450" alt="{{ name | escape }}" loading="lazy">
+                  {% endif %}
+                  <span class="product-card__tag eyebrow">{{ animal_key | t }}</span>
                 </a>
                 <div class="card__body">
-                  <p class="card__animal">{{ all_animals[i] }}</p>
-                  <h3 class="card__name">{{ all_names[i] }}</h3>
-                  <p class="card__price">{% if product != blank %}{{ product.price | money }}{% else %}€19,95{% endif %}</p>
+                  <p class="card__animal eyebrow">{{ animal_key | t }}</p>
+                  <h3 class="card__name">{{ name }}</h3>
+                  <p class="card__price price">{% if product != blank %}{{ product.price | money }}{% else %}€19.95{% endif %}</p>
+                  <ul class="bb-pdp__proof">
+                    <li>{{ 'bb.shop.proof_toddlers' | t }}</li>
+                  </ul>
                   {% if product != blank %}
                     {% form 'product', product %}
                       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                      <button type="submit" class="btn btn--primary btn--block">Add to basket</button>
+                      <button type="submit" class="btn btn--primary btn--block">{{ 'bb.shop.add' | t }}</button>
                     {% endform %}
-                    <a class="card__link" href="{{ product.url }}">View details</a>
+                    <a class="card__link" href="{{ product.url }}">{{ 'bb.shop.details' | t }}</a>
+                  {% else %}
+                    <button type="button" class="btn btn--primary btn--block" data-bb-pick="{{ handle }}">
+                      {{ 'bb.shop.pick' | t: name: name }}
+                    </button>
                   {% endif %}
                 </div>
               </article>
@@ -155,7 +172,6 @@
       </div>
     </section>
 
-    <!-- FAMILY -->
     <section class="section section--warm">
       <div class="wrap family">
         <div class="family__media">
@@ -164,206 +180,167 @@
             width="700"
             height="467"
             loading="lazy"
-            alt="A parent and two children at the table with tea, cookies and their buddies"
+            alt="{{ 'bb.family.image_alt' | t }}"
           >
         </div>
         <div>
-          <p class="sec-eyebrow">Family moment</p>
-          <h2 class="sec-title">From school bags to tea time.</h2>
-          <p>School day finished? Grab a snack, pour something warm and catch up together.</p>
+          <p class="sec-eyebrow eyebrow">{{ 'bb.family.eyebrow' | t }}</p>
+          <h2 class="sec-title">{{ 'bb.family.title' | t }}</h2>
+          <p>{{ 'bb.family.body' | t }}</p>
           <ul class="family__list">
-            <li><span>Made for the after-school table</span></li>
-            <li><span>One buddy each, so there is nothing to share</span></li>
-            <li><span>Small enough to live next to the biscuit tin</span></li>
+            <li><span>{{ 'bb.family.li1' | t }}</span></li>
+            <li><span>{{ 'bb.family.li2' | t }}</span></li>
+            <li><span>{{ 'bb.family.li3' | t }}</span></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- FEATURES -->
     <section class="section section--cream" id="features">
       <div class="wrap">
-        <header class="sec-head">
-          <h2 class="sec-title">Why families like them</h2>
-        </header>
-        <div class="grid-features">
-          <article class="feat">
-            <h3 class="feat__title">Gentle airflow</h3>
-            <p>A small stream of air directed across the drink or meal.</p>
-          </article>
-          <article class="feat">
-            <h3 class="feat__title">USB rechargeable</h3>
-            <p>Charges over USB, so there are no batteries to buy.</p>
-          </article>
-          <article class="feat">
-            <h3 class="feat__title">Collectible characters</h3>
-            <p>Six designs, so everyone picks their own.</p>
-          </article>
-          <article class="feat">
-            <h3 class="feat__title">A perfect little gift</h3>
-            <p>Small, playful and easy to wrap.</p>
-          </article>
+        <div class="bb-section-shell bb-section-shell--mint">
+          <header class="sec-head">
+            <h2 class="sec-title">{{ 'bb.features.title' | t }}</h2>
+          </header>
+          <div class="grid-features bb-panel-grid">
+            <article class="feat bb-panel">
+              <h3 class="feat__title">{{ 'bb.features.air_title' | t }}</h3>
+              <p>{{ 'bb.features.air_body' | t }}</p>
+            </article>
+            <article class="feat bb-panel">
+              <h3 class="feat__title">{{ 'bb.features.usb_title' | t }}</h3>
+              <p>{{ 'bb.features.usb_body' | t }}</p>
+            </article>
+            <article class="feat bb-panel">
+              <h3 class="feat__title">{{ 'bb.features.chars_title' | t }}</h3>
+              <p>{{ 'bb.features.chars_body' | t }}</p>
+            </article>
+            <article class="feat bb-panel">
+              <h3 class="feat__title">{{ 'bb.features.gift_title' | t }}</h3>
+              <p>{{ 'bb.features.gift_body' | t }}</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- UGC / MOMENTS -->
     <section class="section section--white" id="ugc">
       <div class="wrap">
         <header class="sec-head">
-          <h2 class="sec-title">Breezy moments 💨</h2>
-          <p class="sec-sub">@breezybuddies</p>
+          <h2 class="sec-title">{{ 'bb.ugc.title' | t }}</h2>
+          <p class="sec-sub">{{ 'bb.ugc.sub' | t }}</p>
         </header>
-        <div class="grid-ugc" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;">
-          <img src="{{ 'bb-ugc-soup.webp' | asset_url }}" alt="Soup night" loading="lazy" style="border-radius:28px;width:100%;aspect-ratio:3/4;object-fit:cover;">
-          <img src="{{ 'bb-ugc-cocoa.webp' | asset_url }}" alt="Hot chocolate" loading="lazy" style="border-radius:28px;width:100%;aspect-ratio:3/4;object-fit:cover;">
-          <img src="{{ 'bb-ugc-breakfast.webp' | asset_url }}" alt="Breakfast" loading="lazy" style="border-radius:28px;width:100%;aspect-ratio:3/4;object-fit:cover;">
-          <img src="{{ 'bb-on-mug.webp' | asset_url }}" alt="Buddy on mug" loading="lazy" style="border-radius:28px;width:100%;aspect-ratio:3/4;object-fit:cover;">
-          <img src="{{ 'bb-lineup.webp' | asset_url }}" alt="Buddy lineup" loading="lazy" style="border-radius:28px;width:100%;aspect-ratio:3/4;object-fit:cover;">
+        <div class="bb-ugc" data-bb-ugc>
+          <button type="button" class="bb-ugc__nav bb-ugc__nav--prev" data-bb-ugc-prev aria-label="Previous">‹</button>
+          <div class="bb-ugc__track" data-bb-ugc-track>
+            <figure class="bb-ugc__card bb-ugc__card--video">
+              <img src="{{ 'bb-ugc-soup.webp' | asset_url }}" alt="{{ 'bb.ugc.soup' | t }}" width="360" height="480" loading="lazy">
+              <button type="button" class="bb-ugc__play" aria-label="{{ 'bb.ugc.video_label' | t }}">▶</button>
+              <figcaption>{{ 'bb.ugc.soup' | t }}</figcaption>
+            </figure>
+            <figure class="bb-ugc__card">
+              <img src="{{ 'bb-ugc-cocoa.webp' | asset_url }}" alt="{{ 'bb.ugc.cocoa' | t }}" width="360" height="480" loading="lazy">
+              <figcaption>{{ 'bb.ugc.cocoa' | t }}</figcaption>
+            </figure>
+            <figure class="bb-ugc__card bb-ugc__card--video">
+              <img src="{{ 'bb-ugc-breakfast.webp' | asset_url }}" alt="{{ 'bb.ugc.breakfast' | t }}" width="360" height="480" loading="lazy">
+              <button type="button" class="bb-ugc__play" aria-label="{{ 'bb.ugc.video_label' | t }}">▶</button>
+              <figcaption>{{ 'bb.ugc.breakfast' | t }}</figcaption>
+            </figure>
+            <figure class="bb-ugc__card">
+              <img src="{{ 'bb-on-mug.webp' | asset_url }}" alt="{{ 'bb.ugc.mug' | t }}" width="360" height="480" loading="lazy">
+              <figcaption>{{ 'bb.ugc.mug' | t }}</figcaption>
+            </figure>
+            <figure class="bb-ugc__card">
+              <img src="{{ 'bb-lineup.webp' | asset_url }}" alt="{{ 'bb.ugc.lineup' | t }}" width="360" height="480" loading="lazy">
+              <figcaption>{{ 'bb.ugc.lineup' | t }}</figcaption>
+            </figure>
+            <figure class="bb-ugc__card">
+              <img src="{{ 'bb-family.webp' | asset_url }}" alt="{{ 'bb.family.image_alt' | t }}" width="360" height="480" loading="lazy">
+              <figcaption>{{ 'bb.family.eyebrow' | t }}</figcaption>
+            </figure>
+          </div>
+          <button type="button" class="bb-ugc__nav bb-ugc__nav--next" data-bb-ugc-next aria-label="Next">›</button>
         </div>
       </div>
     </section>
 
-    <!-- BUNDLES -->
-    <section class="section section--mint" id="bundles">
+    <section class="section section--cream" id="bundles">
       <div class="wrap">
         <header class="sec-head">
-          <h2 class="sec-title">Pick your set</h2>
-          <p class="sec-sub">More buddies, more smiles — and a better price.</p>
+          <h2 class="sec-title">{{ 'bb.bundles.title' | t }}</h2>
+          <p class="sec-sub">{{ 'bb.bundles.sub' | t }}</p>
         </header>
-        <div class="grid-bundles" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;">
-          <article class="card" style="--accent-soft:#fff;padding:1.5rem;">
-            <h3 class="card__name">1 Buddy</h3>
-            <p class="card__animal">Starter</p>
-            <p class="card__price">€19,95</p>
-            <a class="btn btn--soft btn--block" href="#shop">Choose</a>
-          </article>
-          <article class="card" style="--accent:#ff6b8a;--accent-soft:#fff;padding:1.5rem;border:2px solid #ff6b8a;">
-            <span class="card__badge">Most popular</span>
-            <h3 class="card__name">2 Buddies</h3>
-            <p class="card__animal">Sibling set</p>
-            <p class="card__price">€34,91 <s style="opacity:.45;font-size:.9rem;">€39,90</s></p>
-            <p style="color:#2f9e6b;font-weight:700;">Save €4,99</p>
-            <a class="btn btn--primary btn--block" href="#shop">Choose</a>
-          </article>
-          <article class="card" style="--accent-soft:#fff;padding:1.5rem;">
-            <span class="card__badge" style="background:#a78bfa;">Best value</span>
-            <h3 class="card__name">3 Buddies</h3>
-            <p class="card__animal">Family pack</p>
-            <p class="card__price">€47,88 <s style="opacity:.45;font-size:.9rem;">€59,85</s></p>
-            <p style="color:#2f9e6b;font-weight:700;">Save €11,97</p>
-            <a class="btn btn--soft btn--block" href="#shop">Choose</a>
-          </article>
+        <div class="bb-bundle-grid">
+          <button type="button" class="bb-bundle-card" data-bb-pdp-bundle="single" aria-pressed="false">
+            <p class="bb-bundle-card__title">{{ 'bb.bundles.single_title' | t }}</p>
+            <p class="bb-bundle-card__sub">{{ 'bb.bundles.single_sub' | t }}</p>
+            <p class="bb-bundle-card__price price">€19.95</p>
+          </button>
+          <button type="button" class="bb-bundle-card" data-bb-pdp-bundle="duo" aria-pressed="false">
+            <p class="bb-bundle-card__title">{{ 'bb.bundles.duo_title' | t }}</p>
+            <p class="bb-bundle-card__sub">{{ 'bb.bundles.duo_sub' | t }}</p>
+            <p class="bb-bundle-card__price price">€34.91</p>
+          </button>
+          <button type="button" class="bb-bundle-card is-featured" data-bb-pdp-bundle="family" aria-pressed="true">
+            <span class="bb-bundle-card__tag">{{ 'bb.bundles.family_tag' | t }}</span>
+            <p class="bb-bundle-card__title">{{ 'bb.bundles.family_title' | t }}</p>
+            <p class="bb-bundle-card__sub">{{ 'bb.bundles.family_sub' | t }}</p>
+            <p class="bb-bundle-card__price price">€47.88</p>
+            <span class="tier-tag tier-tag--shipping">{{ 'bb.bundles.free_shipping_tag' | t }}</span>
+          </button>
         </div>
+        {% render 'bb-trust-badges' %}
       </div>
     </section>
 
-    <!-- REVIEWS -->
-    <section class="section section--cream" id="reviews">
+    <section class="section section--mint-soft" id="reviews">
       <div class="wrap">
-        <header class="sec-head">
-          <h2 class="sec-title">What families say</h2>
-          <p class="sec-sub" style="color:#c9a227;">Sample content — replace with real reviews before launch.</p>
-        </header>
-        <div class="grid-cards">
-          <article class="card" style="--accent-soft:#fff;">
-            <div class="card__body">
-              <p>★★★★★</p>
-              <p>“My daughter waits for her tea without complaining now. She just picks Ellie and sits down.”</p>
-              <p class="card__animal">Sanne · NL · Ellie Elephant</p>
-            </div>
-          </article>
-          <article class="card" style="--accent-soft:#fff;">
-            <div class="card__body">
-              <p>★★★★★</p>
-              <p>“We bought two so the kids stop fighting over who gets the buddy. Dinner is calmer.”</p>
-              <p class="card__animal">Marc · BE · Dino Mint</p>
-            </div>
-          </article>
-          <article class="card" style="--accent-soft:#fff;">
-            <div class="card__body">
-              <p>★★★★★</p>
-              <p>“Looks like a toy, works like a tiny fan. Cute gift for my sister’s toddlers.”</p>
-              <p class="card__animal">Lena · DE · Mochi Cat</p>
-            </div>
-          </article>
+        <div class="bb-section-shell bb-early">
+          <header class="sec-head">
+            <h2 class="sec-title">{{ 'bb.early.title' | t }}</h2>
+            <p class="sec-sub">{{ 'bb.early.body' | t }}</p>
+          </header>
+          <p class="bb-early__cta-wrap">
+            <a class="btn btn--primary btn--lg" href="#shop">{{ 'bb.early.cta' | t }}</a>
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
     <section class="section section--white" id="faq">
-      <div class="wrap">
+      <div class="wrap wrap--narrow bb-compact">
         <header class="sec-head">
-          <h2 class="sec-title">Questions, answered</h2>
-          <p class="sec-sub">Anything we have not measured ourselves yet, we say so.</p>
+          <h2 class="sec-title">{{ 'bb.faq.title' | t }}</h2>
+          <p class="sec-sub">{{ 'bb.faq.sub' | t }}</p>
         </header>
-        <div class="faq" style="display:grid;gap:0.85rem;max-width:760px;margin:0 auto;">
-          <details class="card" style="--accent-soft:#fff;padding:1rem 1.25rem;">
-            <summary style="font-weight:800;cursor:pointer;font-family:var(--font-display);">What is a BreezyBuddy?</summary>
-            <p style="margin:.75rem 0 0;color:var(--ink-soft);">A tiny animal buddy that clips onto the edge of a mug or bowl and moves a gentle breeze across warm drinks and meals.</p>
-          </details>
-          <details class="card" style="--accent-soft:#fff;padding:1rem 1.25rem;">
-            <summary style="font-weight:800;cursor:pointer;font-family:var(--font-display);">How does it attach?</summary>
-            <p style="margin:.75rem 0 0;color:var(--ink-soft);">It hooks over the rim — body outside, paws over the edge — so the breeze points at the drink.</p>
-          </details>
-          <details class="card" style="--accent-soft:#fff;padding:1rem 1.25rem;">
-            <summary style="font-weight:800;cursor:pointer;font-family:var(--font-display);">Can I use it with mugs and bowls?</summary>
-            <p style="margin:.75rem 0 0;color:var(--ink-soft);">Yes. Straight-edge cups and bowls work best (roughly 2–6 mm rim).</p>
-          </details>
-          <details class="card" style="--accent-soft:#fff;padding:1rem 1.25rem;">
-            <summary style="font-weight:800;cursor:pointer;font-family:var(--font-display);">Is it rechargeable?</summary>
-            <p style="margin:.75rem 0 0;color:var(--ink-soft);">Yes — USB charging, no batteries to replace.</p>
-          </details>
-          <details class="card" style="--accent-soft:#fff;padding:1rem 1.25rem;">
-            <summary style="font-weight:800;cursor:pointer;font-family:var(--font-display);">How long does shipping take?</summary>
-            <p style="margin:.75rem 0 0;color:var(--ink-soft);">We ship worldwide. Typical delivery to US/UK/EU is about 8–16 business days depending on destination.</p>
-          </details>
-          <details class="card" style="--accent-soft:#fff;padding:1rem 1.25rem;">
-            <summary style="font-weight:800;cursor:pointer;font-family:var(--font-display);">Can I return it?</summary>
-            <p style="margin:.75rem 0 0;color:var(--ink-soft);">Yes — 30-day returns if you change your mind.</p>
-          </details>
-        </div>
+        {% render 'bb-faq-trust', mode: 'faq' %}
       </div>
     </section>
 
-    <!-- TRUST -->
-    <section class="section section--cream section--tight" id="trust">
+    <section class="section section--cream" id="trust">
       <div class="wrap">
-        <div class="grid-features">
-          <article class="feat">
-            <h3 class="feat__title">Worldwide delivery</h3>
-            <p>We ship to the EU, UK, US, Canada and Australia.</p>
-          </article>
-          <article class="feat">
-            <h3 class="feat__title">Secure checkout</h3>
-            <p>Payments are handled by Shopify. We never see your card details.</p>
-          </article>
-          <article class="feat">
-            <h3 class="feat__title">Real support</h3>
-            <p>Email us and a person answers, usually within one working day.</p>
-          </article>
-          <article class="feat">
-            <h3 class="feat__title">30-day returns</h3>
-            <p>Changed your mind? Send it back within 30 days of delivery.</p>
-          </article>
+        <div class="bb-section-shell">
+          <header class="sec-head">
+            <h2 class="sec-title">{{ 'bb.trust.title' | t }}</h2>
+          </header>
+          {% render 'bb-faq-trust', mode: 'trust' %}
         </div>
       </div>
     </section>
 
-    <!-- NEWSLETTER -->
-    <section class="section section--cream section--tight">
+    <section class="section section--mint-soft section--tight">
       <div class="wrap">
         <div class="news">
-          <h2 class="news__title">Join the Breezy Club</h2>
-          <p class="news__body">New buddies, family ideas &amp; special drops.</p>
+          <h2 class="news__title">{{ 'bb.newsletter.title' | t }}</h2>
+          <p class="news__body">{{ 'bb.newsletter.body' | t }}</p>
           {% form 'customer', class: 'news__form' %}
             <input type="hidden" name="contact[tags]" value="newsletter,breezy-club">
-            <label class="visually-hidden" for="bb-news-email">Your email address</label>
-            <input id="bb-news-email" type="email" name="contact[email]" required autocomplete="email" placeholder="Your email address">
-            <button type="submit" class="btn btn--primary btn--lg">Join the club</button>
+            <label class="visually-hidden" for="bb-news-email">{{ 'bb.newsletter.email_label' | t }}</label>
+            <input id="bb-news-email" type="email" name="contact[email]" required autocomplete="email" placeholder="{{ 'bb.newsletter.email_placeholder' | t }}">
+            <button type="submit" class="btn btn--primary btn--lg">{{ 'bb.newsletter.cta' | t }}</button>
           {% endform %}
-          <p class="news__privacy">No spam. Unsubscribe in one click.</p>
+          <p class="news__privacy">{{ 'bb.newsletter.privacy' | t }}</p>
         </div>
       </div>
     </section>
@@ -374,32 +351,39 @@
       <div>
         <div class="bb-footer__brand">
           <img src="{{ 'bb-logo-circle.png' | asset_url }}" alt="" width="48" height="48">
-          BreezyBuddies
+          {{ 'bb.brand' | t }}
         </div>
-        <p>Tiny animal buddies that bring a playful breeze to warm drinks and meals. Sip. Eat. Repeat.</p>
+        <p>{{ 'bb.footer.blurb' | t }}</p>
       </div>
       <div class="bb-footer__cols">
         <div>
-          <h4>Shop</h4>
-          <a href="#shop">All buddies</a>
-          <a href="#bundles">Sets</a>
+          <h4>{{ 'bb.footer.shop' | t }}</h4>
+          <a href="#shop">{{ 'bb.footer.all' | t }}</a>
+          <a href="#bundles">{{ 'bb.footer.sets' | t }}</a>
         </div>
         <div>
-          <h4>Help</h4>
-          <a href="#faq">FAQ</a>
-          <a href="#how">How it works</a>
-          <a href="mailto:{{ shop.email }}">Contact</a>
+          <h4>{{ 'bb.footer.help' | t }}</h4>
+          <a href="#faq">{{ 'bb.nav.faq' | t }}</a>
+          <a href="#how">{{ 'bb.nav.how' | t }}</a>
+          <a href="mailto:{{ shop.email }}">{{ 'bb.footer.contact' | t }}</a>
         </div>
         <div>
-          <h4>Company</h4>
-          <a href="{{ routes.root_url }}">Home</a>
-          <a href="{{ routes.cart_url }}">Cart</a>
+          <h4>{{ 'bb.footer.company' | t }}</h4>
+          <a href="{{ routes.root_url }}">{{ 'bb.footer.home' | t }}</a>
+          <a href="{{ routes.cart_url }}">{{ 'bb.footer.cart' | t }}</a>
         </div>
       </div>
-      <p class="bb-footer__copy">© {{ 'now' | date: '%Y' }} BreezyBuddies · Working brand name</p>
+      {% assign bb_year = 'now' | date: '%Y' %}
+      <p class="bb-footer__copy">{{ 'bb.footer.copy' | t: year: bb_year }}</p>
     </div>
   </footer>
 </div>
+
+{% if cart.item_count > 0 %}
+  {% render 'bb-sticky-quick-add' %}
+{% endif %}
+{% render 'bb-cart-drawer' %}
+<script src="{{ 'bb-commerce.js' | asset_url }}" defer></script>
 
 {% schema %}
 {

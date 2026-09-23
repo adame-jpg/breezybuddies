@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff6b8a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Breezy Social" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Isa · Social playbook | BreezyBuddies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --coral: #ff6b8a;
+      --coral-dark: #f0506e;
+      --mint: #7ddbd0;
+      --cream: #fff8ee;
+      --ink: #28252d;
+      --muted: #6f6875;
+      --line: #ece0d3;
+      --white: #fff;
+      --ok: #2f9e6b;
+      --font-d: "Baloo 2", system-ui, sans-serif;
+      --font-b: "Nunito Sans", system-ui, sans-serif;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-b);
+      background: linear-gradient(180deg, #ffe3ea 0%, var(--cream) 28%, var(--cream) 100%);
+      color: var(--ink);
+      line-height: 1.45;
+      padding-bottom: calc(88px + var(--safe-b));
+    }
+    .top {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,248,238,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 16px 10px;
+    }
+    .top h1 {
+      font-family: var(--font-d);
+      font-size: 1.35rem;
+      margin: 0 0 2px;
+      font-weight: 800;
+    }
+    .top p { margin: 0; font-size: .82rem; color: var(--muted); font-weight: 600; }
+    .progress {
+      margin-top: 10px;
+      height: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress > span {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--coral), var(--coral-dark));
+      transition: width .25s ease;
+    }
+    .progress-meta {
+      display: flex; justify-content: space-between;
+      font-size: .75rem; font-weight: 800; color: var(--muted);
+      margin-top: 6px;
+    }
+    .wrap { padding: 16px; max-width: 560px; margin: 0 auto; }
+    .hero {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(40,37,45,.05);
+    }
+    .hero strong { color: var(--coral-dark); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      font-size: .72rem; font-weight: 800; letter-spacing: .02em;
+      padding: 6px 10px; border-radius: 999px;
+      background: #e2f7f4; color: #1a6b5c;
+    }
+    .chip.coral { background: #ffe3ea; color: #b83d5a; }
+    .nav {
+      display: flex; gap: 8px; overflow-x: auto;
+      padding: 0 16px 8px; margin: 0 -16px 8px;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      flex: 0 0 auto;
+      text-decoration: none;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: .78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .section {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .section > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      user-select: none;
+    }
+    .section > summary::-webkit-details-marker { display: none; }
+    .section > summary::after {
+      content: "+";
+      width: 28px; height: 28px;
+      border-radius: 999px;
+      background: #ffe3ea;
+      color: var(--coral-dark);
+      display: grid; place-items: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .section[open] > summary::after { content: "–"; }
+    .section .body { padding: 0 16px 16px; }
+    .hint {
+      font-size: .85rem; color: var(--muted); margin: 0 0 12px;
+    }
+    .item {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+    }
+    .item:first-of-type { border-top: 0; }
+    .item input {
+      width: 22px; height: 22px;
+      margin-top: 2px;
+      accent-color: var(--coral-dark);
+    }
+    .item label {
+      font-weight: 700;
+      font-size: .95rem;
+      display: block;
+    }
+    .item .sub {
+      display: block;
+      margin-top: 4px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .item.done label { text-decoration: line-through; color: var(--muted); }
+    .day {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 12px;
+      margin: 8px 0;
+    }
+    .day h3 {
+      margin: 0 0 8px;
+      font-size: .78rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--coral-dark);
+      font-weight: 800;
+    }
+    .prompt {
+      background: #28252d;
+      color: #fff8ee;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: .8rem;
+      white-space: pre-wrap;
+      margin: 8px 0;
+      position: relative;
+    }
+    .copy {
+      appearance: none; border: 0; cursor: pointer;
+      background: var(--coral);
+      color: #fff;
+      font-weight: 800;
+      font-size: .75rem;
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-top: 8px;
+    }
+    .foot-actions {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+      background: rgba(255,248,238,.96);
+      border-top: 1px solid var(--line);
+      padding: 10px 16px calc(10px + var(--safe-b));
+      display: flex; gap: 8px;
+      max-width: 560px; margin: 0 auto;
+    }
+    .foot-actions button {
+      flex: 1;
+      appearance: none; border: 0; cursor: pointer;
+      font-family: var(--font-b);
+      font-weight: 800;
+      font-size: .85rem;
+      border-radius: 999px;
+      padding: 12px;
+    }
+    .btn-primary { background: linear-gradient(180deg, #ff7c97, #f0506e); color: #fff; }
+    .btn-ghost { background: #fff; border: 1px solid var(--line) !important; color: var(--ink); }
+    .toast {
+      position: fixed; left: 50%; bottom: calc(72px + var(--safe-b));
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: #fff;
+      padding: 10px 14px; border-radius: 999px;
+      font-size: .8rem; font-weight: 700;
+      opacity: 0; pointer-events: none;
+      transition: .2s ease;
+      z-index: 40;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .warn {
+      background: #fff4d0; border: 1px solid #ffd85a;
+      border-radius: 12px; padding: 10px 12px;
+      font-size: .8rem; font-weight: 700; margin-bottom: 10px;
+    }
+    .vote {
+      display: grid; gap: 8px; margin-top: 8px;
+    }
+    .vote label {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      background: var(--cream);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .vote label.picked {
+      border-color: var(--coral-dark);
+      background: #ffe3ea;
+    }
+    .vote input { margin-top: 3px; accent-color: var(--coral-dark); }
+    .vote .name { font-family: var(--font-d); font-size: 1.05rem; font-weight: 800; }
+    .vote .dom { display: block; font-size: .78rem; font-weight: 800; color: var(--ok); margin-top: 2px; }
+    .vote .why { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-top: 4px; }
+    .picked-banner {
+      display: none;
+      margin-top: 10px;
+      background: #e2f7f4;
+      border: 1px solid #7ddbd0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: .85rem;
+      font-weight: 800;
+    }
+    .picked-banner.show { display: block; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <h1>Breezy · Social playbook</h1>
+    <p>Isa’s telefoon-lijst · vinkjes blijven bewaard op dit toestel</p>
+    <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+    <div class="progress-meta">
+      <span id="count">0 / 0 gedaan</span>
+      <span>≈ 60–90 min/dag</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <p style="margin:0;font-weight:700">
+        Jij doet <strong>content + community</strong> vanaf je telefoon.
+        Adam doet shop/tech. Publiek is <strong>Engels / internationaal</strong> — captions in EN.
+      </p>
+      <div class="chips">
+        <span class="chip coral">Instagram</span>
+        <span class="chip coral">TikTok</span>
+        <span class="chip">Canva</span>
+        <span class="chip">Gemini / ChatGPT</span>
+        <span class="chip">CapCut</span>
+      </div>
+    </div>
+
+    <details class="section" id="naam" open>
+      <summary>⭐ Stap 0 · Kies de merknamen</summary>
+      <div class="body">
+        <div class="warn">
+          <code>breezybuddies.com</code> is bezet. Tik jouw favoriet hieronder — Adam koopt daarna het domein.
+          Check vóór aankoop nog even bij Namecheap/Google Domains (status: vrij op 7 sep 2026 via whois).
+        </div>
+        <div class="vote" id="name-vote" role="radiogroup" aria-label="Merknaam">
+          <label>
+            <input type="radio" name="brand" value="HeyBreezies|heybreezies.com">
+            <span>
+              <span class="name">Hey Breezies</span>
+              <span class="dom">heybreezies.com ✓ vrij</span>
+              <span class="why">Kort, vriendelijk, “hey” werkt goed op socials (@heybreezies).</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="ShopBreezies|shopbreezies.com">
+            <span>
+              <span class="name">Shop Breezies</span>
+              <span class="dom">shopbreezies.com ✓ vrij</span>
+              <span class="why">Meteen duidelijk: hier koop je. Iets meer “webshop”-gevoel.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="BreezySip|breezysip.com">
+            <span>
+              <span class="name">BreezySip</span>
+              <span class="dom">breezysip.com ✓ vrij</span>
+              <span class="why">Zegt wat het doet (sip + breeze). Makkelijk te onthouden.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="BreezyFest|breezyfest.com">
+            <span>
+              <span class="name">BreezyFest</span>
+              <span class="dom">breezyfest.com ✓ vrij</span>
+              <span class="why">Past bij tagline “It’s a Breezy Fest!” Feestelijk, merkbaar.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="CoolSipCrew|coolsipcrew.com">
+            <span>
+              <span class="name">CoolSip Crew</span>
+              <span class="dom">coolsipcrew.com ✓ vrij</span>
+              <span class="why">Community-gevoel (“crew”). Goed voor kids + parents club.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="CoolSipClub|coolsipclub.com">
+            <span>
+              <span class="name">CoolSip Club</span>
+              <span class="dom">coolsipclub.com ✓ vrij</span>
+              <span class="why">Zelfde vibe als Crew, iets “clubbier” / collectible.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="LittleBreezers|littlebreezers.com">
+            <span>
+              <span class="name">Little Breezers</span>
+              <span class="dom">littlebreezers.com ✓ vrij</span>
+              <span class="why">Duidelijk kids-product. Iets langer om te typen.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="BuddyBreeze|buddybreeze.com">
+            <span>
+              <span class="name">BuddyBreeze</span>
+              <span class="dom">buddybreeze.com ✓ vrij</span>
+              <span class="why">Buddy + breeze = product in de naam. Dicht bij oude richting.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="BreezyClip|breezyclip.com">
+            <span>
+              <span class="name">BreezyClip</span>
+              <span class="dom">breezyclip.com ✓ vrij</span>
+              <span class="why">Clip-on is het mechanisme. Functioneel, iets minder “cute”.</span>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="brand" value="TheBreezyCrew|thebreezycrew.com">
+            <span>
+              <span class="name">The Breezy Crew</span>
+              <span class="dom">thebreezycrew.com ✓ vrij</span>
+              <span class="why">Langer, wel sterk merkverhaal. Social handle kan @breezycrew zijn.</span>
+            </span>
+          </label>
+        </div>
+        <div class="picked-banner" id="picked-banner"></div>
+        <div class="item" data-id="name-done" style="margin-top:12px;border-top:0;padding-top:0">
+          <input type="checkbox" id="name-done">
+          <label for="name-done">Keuze doorgegeven aan Adam<span class="sub">Dan koopt hij domein + past shop/IG aan</span></label>
+        </div>
+      </div>
+    </details>
+
+    <nav class="nav" aria-label="Sprongen">
+      <a href="#naam">Naam</a>
+      <a href="#setup">Setup</a>
+      <a href="#materiaal">Materiaal</a>
+      <a href="#week1">Week 1</a>
+      <a href="#week2">Week 2</a>
+      <a href="#week3">Week 3–4</a>
+      <a href="#prompts">AI-prompts</a>
+      <a href="#tips">Tips</a>
+    </nav>
+
+    <details class="section" id="setup" open>
+      <summary>0 · Eerst setup</summary>
+      <div class="body">
+        <p class="hint">Doe dit vóór je gaat posten. Max 1–2 avonden.</p>
+        <div class="item" data-id="s1"><input type="checkbox" id="s1"><label for="s1">IG + TikTok account klaar<span class="sub">Handle @breezybuddies (of gekozen naam). Zelfde profielfoto.</span></label></div>
+        <div class="item" data-id="s2"><input type="checkbox" id="s2"><label for="s2">Bio in het Engels + shop-link<span class="sub">Cute clip-on coolers for kids’ mugs & bowls. Sip. Eat. Repeat.</span></label></div>
+        <div class="item" data-id="s3"><input type="checkbox" id="s3"><label for="s3">Canva Brand Kit<span class="sub">Kleuren: cream #fff8ee · coral #ff6b8a · mint #7ddbd0</span></label></div>
+        <div class="item" data-id="s4"><input type="checkbox" id="s4"><label for="s4">Filmhoek thuis<span class="sub">1 buddy + mok/kom + raamlicht + telefoonstatief of stapel boeken</span></label></div>
+        <div class="item" data-id="s5"><input type="checkbox" id="s5"><label for="s5">Mapjes in Telefoon/Drive<span class="sub">01-product · 02-reels · 03-carousels · 04-stories</span></label></div>
+        <div class="item" data-id="s6"><input type="checkbox" id="s6"><label for="s6">Meta Business Suite + TikTok schedule openen<span class="sub">Posts plannen om 17:00–19:00</span></label></div>
+      </div>
+    </details>
+
+    <details class="section" id="materiaal">
+      <summary>1 · Materialen maken</summary>
+      <div class="body">
+        <p class="hint">Batch dit in CapCut + Gemini/ChatGPT. Vink af als het bestand in je map staat.</p>
+        <div class="item" data-id="m1"><input type="checkbox" id="m1"><label for="m1">10 character stills (clean, géén Ali-tekst)<span class="sub">Gemini: studio toy look, pastel bg, no text</span></label></div>
+        <div class="item" data-id="m2"><input type="checkbox" id="m2"><label for="m2">Hero Reel 8–12s: clip → point → breeze<span class="sub">Telefoon + CapCut</span></label></div>
+        <div class="item" data-id="m3"><input type="checkbox" id="m3"><label for="m3">Problem→solution Reel (~10s)<span class="sub">Te heet → buddy → sip</span></label></div>
+        <div class="item" data-id="m4"><input type="checkbox" id="m4"><label for="m4">How it works carrousel (3 slides)<span class="sub">Canva</span></label></div>
+        <div class="item" data-id="m5"><input type="checkbox" id="m5"><label for="m5">Trust/safety carrousel<span class="sub">Geen CE/FCC claimen. BPA alleen met disclaimer.</span></label></div>
+        <div class="item" data-id="m6"><input type="checkbox" id="m6"><label for="m6">Launch announce + Stories countdown<span class="sub">Canva</span></label></div>
+        <div class="item" data-id="m7"><input type="checkbox" id="m7"><label for="m7">30 EN captions in Notes / scheduler<span class="sub">ChatGPT caption bank</span></label></div>
+        <div class="item" data-id="m8"><input type="checkbox" id="m8"><label for="m8">3-pack / free shipping visual<span class="sub">3 Buddies = free shipping</span></label></div>
+      </div>
+    </details>
+
+    <details class="section" id="week1">
+      <summary>Week 1 · Teaser (nog niet hard verkopen)</summary>
+      <div class="body">
+        <div class="warn">Doel: volgen + warm maken. Soft CTA: “follow for launch”.</div>
+        <div class="day">
+          <h3>Maandag</h3>
+          <div class="item" data-id="w1ma"><input type="checkbox" id="w1ma"><label for="w1ma">Reel: wat is een BreezyBuddy?<span class="sub">IG + TikTok · zelfde clip</span></label></div>
+        </div>
+        <div class="day">
+          <h3>Dinsdag</h3>
+          <div class="item" data-id="w1di"><input type="checkbox" id="w1di"><label for="w1di">Carrousel: How it works</label></div>
+        </div>
+        <div class="day">
+          <h3>Woensdag</h3>
+          <div class="item" data-id="w1wo"><input type="checkbox" id="w1wo"><label for="w1wo">Spotlight: Ellie + Stories poll<span class="sub">cat or elephant?</span></label></div>
+        </div>
+        <div class="day">
+          <h3>Donderdag</h3>
+          <div class="item" data-id="w1do"><input type="checkbox" id="w1do"><label for="w1do">Problem/solution Reel</label></div>
+        </div>
+        <div class="day">
+          <h3>Vrijdag</h3>
+          <div class="item" data-id="w1vr"><input type="checkbox" id="w1vr"><label for="w1vr">BTS thuis (unboxing / setup)<span class="sub">Stories + korte Reel</span></label></div>
+        </div>
+        <div class="day">
+          <h3>Zaterdag</h3>
+          <div class="item" data-id="w1za"><input type="checkbox" id="w1za"><label for="w1za">Trust carrousel (eerlijk over safety)</label></div>
+        </div>
+        <div class="day">
+          <h3>Zondag · batch</h3>
+          <div class="item" data-id="w1zo"><input type="checkbox" id="w1zo"><label for="w1zo">5 Reels filmen + captions plannen<span class="sub">Geen publicatie-druk vandaag</span></label></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="section" id="week2">
+      <summary>Week 2 · Soft launch</summary>
+      <div class="body">
+        <div class="warn">Shop-link in bio. Eerste bestellingen / DM’s beantwoorden.</div>
+        <div class="day"><h3>Ma</h3><div class="item" data-id="w2ma"><input type="checkbox" id="w2ma"><label for="w2ma">We’re live Reel + Stories</label></div></div>
+        <div class="day"><h3>Di</h3><div class="item" data-id="w2di"><input type="checkbox" id="w2di"><label for="w2di">Bundle: 3 Buddies = free shipping</label></div></div>
+        <div class="day"><h3>Wo</h3><div class="item" data-id="w2wo"><input type="checkbox" id="w2wo"><label for="w2wo">Mochi + add-to-cart demo</label></div></div>
+        <div class="day"><h3>Do</h3><div class="item" data-id="w2do"><input type="checkbox" id="w2do"><label for="w2do">FAQ Reel: Is it loud?</label></div></div>
+        <div class="day"><h3>Vr</h3><div class="item" data-id="w2vr"><input type="checkbox" id="w2vr"><label for="w2vr">After-school tea (UGC-stijl)</label></div></div>
+        <div class="day"><h3>Za</h3><div class="item" data-id="w2za"><input type="checkbox" id="w2za"><label for="w2za">Gift idea carrousel</label></div></div>
+        <div class="day"><h3>Zo</h3><div class="item" data-id="w2zo"><input type="checkbox" id="w2zo"><label for="w2zo">Batch + 20 min DM’s / comments</label></div></div>
+      </div>
+    </details>
+
+    <details class="section" id="week3">
+      <summary>Week 3–4 · Ritme</summary>
+      <div class="body">
+        <p class="hint">Duurzaam tempo vanaf thuis.</p>
+        <div class="item" data-id="w3a"><input type="checkbox" id="w3a"><label for="w3a">4 Reels / week (demo + character + FAQ)<span class="sub">Week 3</span></label></div>
+        <div class="item" data-id="w3b"><input type="checkbox" id="w3b"><label for="w3b">1 carrousel / week<span class="sub">Gift / bundle / how-to</span></label></div>
+        <div class="item" data-id="w3c"><input type="checkbox" id="w3c"><label for="w3c">Stories 5–6× / week<span class="sub">Polls, this-or-that</span></label></div>
+        <div class="item" data-id="w3d"><input type="checkbox" id="w3d"><label for="w3d">Pinterest: 10 pins uit stills<span class="sub">Week 3</span></label></div>
+        <div class="item" data-id="w3e"><input type="checkbox" id="w3e"><label for="w3e">3 micro-moms benaderen (gifted buddy)<span class="sub">Geen cash nodig</span></label></div>
+        <div class="item" data-id="w4a"><input type="checkbox" id="w4a"><label for="w4a">Top 3 Reels opnieuw met nieuwe hook<span class="sub">Week 4</span></label></div>
+        <div class="item" data-id="w4b"><input type="checkbox" id="w4b"><label for="w4b">Echte klantfoto’s vragen (toestemming)<span class="sub">Week 4</span></label></div>
+        <div class="item" data-id="w4c"><input type="checkbox" id="w4c"><label for="w4c">Met Adam: welke Reel → meeste clicks<span class="sub">20 min review</span></label></div>
+      </div>
+    </details>
+
+    <details class="section" id="prompts">
+      <summary>AI-prompts (kopiëren)</summary>
+      <div class="body">
+        <p class="hint">Tik op kopiëren → plak in Gemini of ChatGPT.</p>
+        <div class="prompt" id="p1">Product photo, cute cartoon [ANIMAL] clip-on USB mug cooler, matte plastic toy look, soft cream surface, mint pastel background, studio lighting, centered, no text, no logos, no watermark, square 1:1</div>
+        <button class="copy" type="button" data-copy="p1">Kopieer foto-prompt</button>
+
+        <div class="prompt" id="p2">Write 10 Instagram Reel captions for BreezyBuddies — cute clip-on animal coolers for kids’ mugs and bowls. English, warm parent tone, short hooks, CTA “link in bio”, no fake reviews, no CE/FCC claims. Include 5 hashtags max.</div>
+        <button class="copy" type="button" data-copy="p2">Kopieer caption-prompt</button>
+
+        <div class="prompt" id="p3">Write a 3-slide Instagram carousel outline: How a BreezyBuddy works. Slide titles + 1 short sentence each. English. Playful, clear, for busy parents.</div>
+        <button class="copy" type="button" data-copy="p3">Kopieer carrousel-prompt</button>
+      </div>
+    </details>
+
+    <details class="section" id="tips">
+      <summary>Tips &amp; niet doen</summary>
+      <div class="body">
+        <div class="item" data-id="t1"><input type="checkbox" id="t1"><label for="t1">Zet deze pagina op je beginscherm<span class="sub">Safari → Deel → Zet op beginscherm</span></label></div>
+        <p class="hint" style="margin-top:12px"><strong>Wel:</strong> demo’s, characters, after-school momenten, eerlijke FAQ.<br>
+        <strong>Niet:</strong> nep-reviews, CE/FCC zonder certificaat, Ali-foto’s met “Food Cooling Fan” tekst.</p>
+        <p class="hint"><strong>Hooks die werken:</strong> Stop blowing on the soup. · Their own buddy = fewer fights. · Clip. Point. Breeze.</p>
+        <p class="hint"><strong>Adam vraagt als je vastzit:</strong> shop-link, kortingen, slechte productfoto vervangen, ads/pixel.</p>
+      </div>
+    </details>
+  </main>
+
+  <div class="foot-actions">
+    <button type="button" class="btn-ghost" id="reset">Reset</button>
+    <button type="button" class="btn-primary" id="today">Scroll naar week</button>
+  </div>
+  <div class="toast" id="toast">Gekopieerd</div>
+
+  <script>
+    const KEY = "bb-isa-social-v1";
+    const NAME_KEY = "bb-isa-brand-pick";
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+    const toast = (msg) => {
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1400);
+    };
+
+    const load = () => {
+      try { return JSON.parse(localStorage.getItem(KEY) || "{}"); }
+      catch { return {}; }
+    };
+    const save = (data) => localStorage.setItem(KEY, JSON.stringify(data));
+
+    const paintVote = () => {
+      const picked = localStorage.getItem(NAME_KEY) || "";
+      $$("#name-vote label").forEach((lab) => {
+        const input = $("input", lab);
+        const on = input.value === picked;
+        input.checked = on;
+        lab.classList.toggle("picked", on);
+      });
+      const banner = $("#picked-banner");
+      if (picked) {
+        const [brand, domain] = picked.split("|");
+        banner.textContent = "Jouw keuze: " + brand + " · " + domain;
+        banner.classList.add("show");
+      } else {
+        banner.classList.remove("show");
+      }
+    };
+
+    document.addEventListener("change", (e) => {
+      if (e.target.name === "brand") {
+        localStorage.setItem(NAME_KEY, e.target.value);
+        paintVote();
+        toast("Keuze bewaard ✓");
+        return;
+      }
+      const box = e.target.closest('input[type="checkbox"]');
+      if (!box) return;
+      const item = box.closest(".item[data-id]");
+      if (!item) return;
+      const data = load();
+      data[item.dataset.id] = box.checked;
+      save(data);
+      refresh();
+    });
+
+    const refresh = () => {
+      const data = load();
+      const items = $$(".item[data-id]");
+      let done = 0;
+      items.forEach((el) => {
+        const id = el.dataset.id;
+        const box = $("input", el);
+        const on = !!data[id];
+        box.checked = on;
+        el.classList.toggle("done", on);
+        if (on) done++;
+      });
+      const total = items.length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      $("#bar").style.width = pct + "%";
+      $("#count").textContent = done + " / " + total + " gedaan";
+    };
+
+    $$(".copy").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const text = $("#" + btn.dataset.copy)?.textContent || "";
+        try {
+          await navigator.clipboard.writeText(text);
+          toast("Gekopieerd ✓");
+        } catch {
+          toast("Selecteer en kopieer handmatig");
+        }
+      });
+    });
+
+    $("#reset").addEventListener("click", () => {
+      if (!confirm("Alle vinkjes wissen op dit toestel?")) return;
+      localStorage.removeItem(KEY);
+      refresh();
+      toast("Geriset");
+    });
+
+    $("#today").addEventListener("click", () => {
+      const target = $("#naam") || $("#week1") || $("#setup");
+      target.open = true;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    paintVote();
+    refresh();
+  </script>
+</body>
+</html>

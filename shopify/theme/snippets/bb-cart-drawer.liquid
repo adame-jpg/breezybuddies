@@ -1,0 +1,84 @@
+{%- comment -%} BreezyBuddies slide-over cart — translated + CRO {%- endcomment -%}
+{%- liquid
+  assign cable = all_products['usb-charging-cable']
+  if cable == blank
+    assign cable = all_products['usb-cable']
+  endif
+  assign cable_variant = blank
+  if cable != blank
+    assign cable_variant = cable.selected_or_first_available_variant.id
+  endif
+-%}
+<div
+  id="bb-cart"
+  class="bb-cart"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="bb-cart-title"
+>
+  <div class="bb-cart__backdrop" data-bb-close-cart tabindex="-1"></div>
+  <div class="bb-cart__panel">
+    <header class="bb-cart__header">
+      <h2 id="bb-cart-title" class="bb-cart__title">
+        {{ 'bb.cart.title' | t }}
+        <span id="bb-cart-count" class="bb-cart__count">0</span>
+      </h2>
+      <button
+        type="button"
+        id="bb-cart-close"
+        class="bb-cart__close"
+        data-bb-close-cart
+        aria-label="{{ 'bb.cart.close' | t }}"
+      >
+        ×
+      </button>
+    </header>
+
+    <div class="bb-cart__ship" aria-live="polite">
+      <p id="bb-cart-ship-text" class="bb-cart__ship-text">{{ 'bb.cart.ship_need_other' | t: count: 3 }}</p>
+      <div class="bb-cart__ship-track">
+        <div id="bb-cart-ship-fill" class="bb-cart__ship-fill"></div>
+      </div>
+    </div>
+
+    <div id="bb-cart-body" class="bb-cart__body">
+      <div class="bb-cart__empty">
+        <h3>{{ 'bb.cart.empty_title' | t }}</h3>
+        <p>{{ 'bb.cart.empty_body' | t }}</p>
+      </div>
+    </div>
+
+    <div id="bb-cart-upsell" class="bb-cart__upsell" hidden>
+      <h3>{{ 'bb.cart.upsell_title' | t }}</h3>
+      <p id="bb-cart-upsell-copy">{{ 'bb.cart.upsell_duo' | t }}</p>
+      <button type="button" class="bb-cart__upsell-btn" data-bb-upsell-add>{{ 'bb.cart.upsell_add' | t }}</button>
+    </div>
+
+    {% if cable_variant != blank %}
+      <div class="bb-cart__upsell bb-cart__upsell--cable" id="bb-cart-cable">
+        <h3>{{ 'bb.cart.cable_title' | t }}</h3>
+        <p>{{ 'bb.cart.cable_body' | t }} · {{ cable.price | money }}</p>
+        <button
+          type="button"
+          class="bb-cart__upsell-btn"
+          data-bb-upsell-cable
+          data-variant="{{ cable_variant }}"
+        >
+          {{ 'bb.cart.cable_add' | t }}
+        </button>
+      </div>
+    {% endif %}
+
+    <footer class="bb-cart__footer">
+      <div class="bb-cart__totals">
+        <span>{{ 'bb.cart.total' | t }}</span>
+        <strong id="bb-cart-total">€0.00</strong>
+      </div>
+      <p id="bb-cart-hint" class="bb-cart__hint"></p>
+      <p class="bb-ship-line bb-ship-line--cart">{{ 'bb.ship_line' | t }}</p>
+      <a class="bb-cart__checkout" href="/checkout">{{ 'bb.cart.checkout' | t }}</a>
+      {% render 'bb-payment-icons' %}
+    </footer>
+  </div>
+</div>

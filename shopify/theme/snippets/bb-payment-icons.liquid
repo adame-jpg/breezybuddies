@@ -1,0 +1,9 @@
+{%- comment -%} Official payment SVGs for whatever is enabled in Shopify Payments {%- endcomment -%}
+<div class="bb-pay" role="group" aria-label="{{ 'bb.payments.label' | t }}">
+  <span class="bb-pay__label">{{ 'bb.payments.label' | t }}</span>
+  <ul class="payment-icons">
+    {%- for type in shop.enabled_payment_types -%}
+      <li>{{ type | payment_type_svg_tag: class: 'payment-icons__icon' }}</li>
+    {%- endfor -%}
+  </ul>
+</div>

@@ -1,0 +1,33 @@
+{%- comment -%} Sticky quick-add — product pages (always) or homepage when cart has items {%- endcomment -%}
+<aside
+  id="bb-sticky"
+  class="bb-sticky"
+  aria-label="{{ 'bb.sticky.label' | t }}"
+  data-bb-sticky-mode="{% if template.name == 'product' %}product{% else %}cart{% endif %}"
+  hidden
+>
+  <div class="bb-sticky__panel">
+    <div class="bb-sticky__product">
+      <img
+        id="bb-sticky-thumb"
+        class="bb-sticky__thumb"
+        src="{{ 'bb-ellie.webp' | asset_url }}"
+        width="60"
+        height="60"
+        alt=""
+      >
+      <div class="bb-sticky__meta">
+        <p id="bb-sticky-name" class="bb-sticky__name">Ellie Elephant</p>
+        <p id="bb-sticky-price" class="bb-sticky__price price"><strong>€19.95</strong></p>
+      </div>
+    </div>
+
+    <div class="bb-sticky__bundles" role="group" aria-label="{{ 'bb.pdp.choose_set' | t }}">
+      <button type="button" class="bb-sticky__bundle" data-bb-sticky-bundle="single" aria-pressed="false">1×</button>
+      <button type="button" class="bb-sticky__bundle" data-bb-sticky-bundle="duo" aria-pressed="false">2×</button>
+      <button type="button" class="bb-sticky__bundle" data-bb-sticky-bundle="family" aria-pressed="true">3×</button>
+    </div>
+
+    <button type="button" id="bb-sticky-cta" class="bb-sticky__cta">{{ 'bb.sticky.cta' | t }}</button>
+  </div>
+</aside>

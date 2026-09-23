@@ -1,0 +1,12 @@
+/*
+ * BreezyBuddies product template — custom PDP showcase
+ */
+{
+  "sections": {
+    "bb_pdp": {
+      "type": "bb-pdp",
+      "settings": {}
+    }
+  },
+  "order": ["bb_pdp"]
+}

@@ -34,7 +34,6 @@
     "inventory_status": "Inventory status",
     "localization_region_and_language": "Region and language selector",
     "menu": "Menu",
-    // This is the label for the header navigation menu when using screen readers, it will read "Primary navigation"
     "header_navigation_label": "Primary",
     "nested_product": "{{ product_title }} for {{ parent_title }}",
     "new_window": "Opens in a new window.",
@@ -68,53 +67,41 @@
     "price_filter_high": "High price"
   },
   "actions": {
-    // Quick add button on product cards, shortened version of add to cart
     "add": "Add",
     "add_to_cart": "Add to cart",
-    // Success message shown after adding item to cart
     "added": "Added",
-    // Button to apply discount code to cart
     "apply": "Apply",
     "back": "Back",
     "back_to": "Back to {{ title }}",
     "back_to_main_menu": "Back to main menu",
     "choose": "Choose",
-    // Button to reset current selection or input
     "clear": "Clear",
-    // Button to remove all applied product filters
     "clear_all": "Clear all",
     "close": "Close",
     "open": "Open",
-    // Continue shopping link on the cart page which takes the user back to a collection page
     "continue_shopping": "Continue shopping",
     "enter_password": "Enter password",
     "log_in_html": "Have an account? <a href=\"{{ link }}\">Log in</a> to check out faster.",
     "log_in": "Sign in",
     "log_out": "Log out",
     "open_image_in_full_screen": "Open image in full screen",
-    // Button to remove applied filters from search/collection results
     "remove": "Remove",
     "remove_discount": "Remove discount {{ code }}",
-    // Button to expand hidden product variant options
     "show_all_options": "Show all options",
     "see_items": {
       "one": "See {{ count }} item",
-      // Button to view filtered product results and close filter dialog
       "other": "See {{ count }} items"
     },
     "show_filters": "Filter",
     "show_less": "Show less",
     "show_more": "Show more",
     "sign_in_options": "Other sign in options",
-    // AR button to view 3D product model in physical space
     "view_in_your_space": "View in your space",
-    // Button to view complete collection/product list
     "view_all": "View all",
     "more": "More",
     "zoom": "Zoom",
     "zoom_media": "Zoom media {{ index }}",
     "close_dialog": "Close dialog",
-    // Button to clear search filter and restore default view
     "reset": "Reset",
     "enter_using_password": "Enter using password",
     "sign_up": "Sign up",
@@ -261,7 +248,6 @@
     "search_results_no_results_check_spelling": "No results found for \"{{ terms }}\". Check the spelling or use a different word or phrase.",
     "search_results_resource_articles": "Blog posts",
     "search_results_resource_collections": "Collections",
-    // Section heading for Shopify store pages in search results
     "search_results_resource_pages": "Pages",
     "search_results_resource_products": "Products",
     "search_results_resource_products_count": {
@@ -278,10 +264,8 @@
       "one": "1 item added to cart",
       "other": "{{ count }} items added to cart"
     },
-    // Button to go from search preview to full search results page
     "search_results_view_all": "View all",
     "search_results_view_all_button": "View all",
-    // Label for customer's note to seller during checkout
     "seller_note": "Special instructions",
     "shipping_policy": "Shipping calculated at checkout.",
     "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
@@ -297,7 +281,6 @@
     "taxes_included_shipping_at_checkout_without_policy_without_discounts": "Taxes included. Shipping is calculated at checkout.",
     "unavailable": "Unavailable",
     "use_fewer_filters_html": "Try using fewer filters, or <a class=\"{{ class }}\" href=\"{{ link }}\">clear all filters</a>.",
-    // Link or button to expand additional information
     "view_more_details": "View more details",
     "volume_pricing_available": "Volume pricing available",
     "volume_pricing": "Volume pricing",
@@ -310,7 +293,6 @@
     "product_count": "Product count",
     "errors": "Errors",
     "wrong_password": "Wrong password",
-    // Legend text for gift card delivery options
     "recipient_form_send_to": "Send to",
     "recipient_form_email_label": "Recipient’s email",
     "recipient_form_email_label_my_email": "My email",
@@ -326,7 +308,6 @@
     "product_custom_property_character_count": "{{ used_chars }}/{{ max_chars }} characters used"
   },
   "fields": {
-    // Separates min and max values in price range filter
     "separator": "to"
   },
   "gift_cards": {
@@ -370,6 +351,227 @@
       "in_cart": "in cart",
       "default_title": "Default Title",
       "sticky_add_to_cart": "Quick add to cart bar"
+    }
+  },
+  "bb": {
+    "brand": "BreezyBuddies",
+    "tagline": "Sip. Eat. Repeat.",
+    "announce": {
+      "shipping": "Free shipping on 3+ buddies",
+      "worldwide": "Worldwide delivery",
+      "returns": "30-day returns"
+    },
+    "nav": {
+      "shop": "Shop",
+      "how": "How it works",
+      "reviews": "Reviews",
+      "faq": "FAQ",
+      "cart": "Cart",
+      "primary": "Primary"
+    },
+    "lang": {
+      "label": "Language",
+      "en": "English",
+      "nl": "Dutch"
+    },
+    "hero": {
+      "eyebrow": "Little breeze. Big smiles.",
+      "title": "Make every sip a little more fun.",
+      "sub": "Meet the tiny buddy that brings a playful breeze to warm drinks and meals.",
+      "cta_shop": "Choose your buddy",
+      "cta_how": "See how it works",
+      "trust_loved": "Loved by families",
+      "trust_gift": "Gift-ready",
+      "trust_chars": "10 characters",
+      "image_alt": "Kids at the kitchen table with BreezyBuddies clipped on their mugs"
+    },
+    "how": {
+      "title": "How it works",
+      "sub": "Three seconds. No instructions needed.",
+      "step1_title": "Clip your buddy on",
+      "step1_body": "It hooks onto the edge of a mug or bowl. Body outside, paws over the rim.",
+      "step2_title": "Point it at the drink",
+      "step2_body": "Turn the little face towards the tea, cocoa or soup.",
+      "step3_title": "Let the breeze do its thing",
+      "step3_body": "A soft stream of air moves across the surface while you wait."
+    },
+    "shop": {
+      "title": "Shop your buddy",
+      "sub": "Pets · Zoo · Dinos · Cartoons — same little breeze.",
+      "add": "Add to cart",
+      "details": "View details",
+      "pick": "Choose {{ name }}",
+      "proof_toddlers": "Toddler favorite"
+    },
+    "groups": {
+      "pets": "Pets",
+      "zoo": "Zoo",
+      "dinos": "Dinos",
+      "cartoons": "Cartoons"
+    },
+    "animals": {
+      "cat": "Cat",
+      "dog": "Dog",
+      "elephant": "Elephant",
+      "monkey": "Monkey",
+      "red_panda": "Red panda",
+      "panda": "Panda",
+      "dino": "Dino",
+      "frog": "Frog",
+      "bunny": "Bunny"
+    },
+    "badges": {
+      "most_picked": "Most picked",
+      "new": "New"
+    },
+    "family": {
+      "eyebrow": "Family moment",
+      "title": "From school bags to tea time.",
+      "body": "School day finished? Grab a snack, pour something warm and catch up together.",
+      "li1": "Made for the after-school table",
+      "li2": "One buddy each, so there is nothing to share",
+      "li3": "Small enough to live next to the biscuit tin",
+      "image_alt": "A parent and two children at the table with tea, cookies and their buddies"
+    },
+    "features": {
+      "title": "Why families like them",
+      "air_title": "Gentle airflow",
+      "air_body": "A small stream of air directed across the drink or meal.",
+      "usb_title": "USB rechargeable",
+      "usb_body": "Charges over USB, so there are no batteries to buy.",
+      "chars_title": "Collectible characters",
+      "chars_body": "Ten collectible characters, so everyone picks their own.",
+      "gift_title": "A perfect little gift",
+      "gift_body": "Small, playful and easy to wrap."
+    },
+    "ugc": {
+      "title": "Breezy moments",
+      "sub": "@breezybuddies · real table moments",
+      "soup": "Soup night",
+      "cocoa": "Hot chocolate",
+      "breakfast": "Breakfast",
+      "mug": "Buddy on mug",
+      "lineup": "Buddy lineup",
+      "video_label": "Play table moment"
+    },
+    "bundles": {
+      "title": "Pick your set",
+      "sub": "More buddies, more smiles — and a better price.",
+      "single_title": "1 Buddy",
+      "single_sub": "Starter",
+      "duo_title": "2 Buddies",
+      "duo_sub": "Sibling set · Save ~12.5%",
+      "family_title": "3 Buddies",
+      "family_sub": "Family pack · Save ~20%",
+      "family_tag": "Most chosen by parents",
+      "free_shipping_tag": "+ Free shipping",
+      "save": "You save {{ amount }}"
+    },
+    "reviews": {
+      "title": "What families say"
+    },
+    "faq": {
+      "title": "Questions parents ask",
+      "sub": "Safety, charging, and how the clip works — answered honestly.",
+      "q1": "Is a BreezyBuddy safe for kids?",
+      "a1": "Built for the kids’ table: wipe-clean shell and a soft silicone clip. We mark BPA-free* from supplier specs and say so clearly until lab certificates are on file.",
+      "q2": "How does it attach to a mug or bowl?",
+      "a2": "Hook it over the rim — body outside, paws over the edge. Works best on straight rims about 2–6 mm (most kids’ mugs and bowls).",
+      "q3": "Is it USB rechargeable?",
+      "a3": "Yes. No disposable batteries — charge over USB. Perfect next to the biscuit tin or in a kitchen drawer.",
+      "q4": "How strong is the breeze / is it quiet?",
+      "a4": "A gentle stream across the drink or soup — not a gale. Made for calmer waiting, not freezing a meal.",
+      "q5": "What if we change our minds?",
+      "a5": "30-day returns after delivery. We ship worldwide; timing depends on destination (typically US/UK/EU about 8–16 business days with dropship)."
+    },
+    "trust": {
+      "title": "Why parents trust it",
+      "safe_title": "Child-safe design",
+      "safe_body": "Soft clip, rounded shapes, and a playful 3D buddy made for the kids’ table.",
+      "usb_title": "USB rechargeable",
+      "usb_body": "No batteries to buy. Charge, clip, gentle breeze.",
+      "ship_title": "Worldwide delivery",
+      "ship_body": "We ship to the EU, UK, US, Canada and Australia.",
+      "support_title": "Real support",
+      "support_body": "Email us — a person usually replies within one working day.",
+      "disclaimer": "* BPA-free per supplier specification. Independent lab certificates will be published once available."
+    },
+    "cert": {
+      "bpa": "100% BPA-Free Silicone",
+      "rotor": "Child-Safe Soft Fan Rotor",
+      "usb": "USB Rechargeable",
+      "label": "Safety & certifications"
+    },
+    "ship_line": "Ordered today = shipped within 24 hours",
+    "newsletter": {
+      "title": "Join the Breezy Club",
+      "body": "New buddies, family ideas & special drops.",
+      "email_label": "Your email address",
+      "email_placeholder": "Your email address",
+      "cta": "Join the club",
+      "privacy": "No spam. Unsubscribe in one click."
+    },
+    "footer": {
+      "blurb": "Tiny animal buddies that bring a playful breeze to warm drinks and meals. Sip. Eat. Repeat.",
+      "shop": "Shop",
+      "all": "All buddies",
+      "sets": "Sets",
+      "help": "Help",
+      "contact": "Contact",
+      "company": "Company",
+      "home": "Home",
+      "cart": "Cart",
+      "copy": "© {{ year }} BreezyBuddies · Working brand name"
+    },
+    "cart": {
+      "title": "Cart",
+      "close": "Close cart",
+      "empty_title": "Your cart is empty",
+      "empty_body": "Pick a buddy and make every sip a little more fun.",
+      "choose": "Choose your buddy",
+      "ship_need_one": "1 more buddy for free shipping!",
+      "ship_need_other": "{{ count }} more buddies for free shipping!",
+      "ship_done": "Free shipping unlocked",
+      "upsell_title": "Upgrade your set",
+      "upsell_duo": "Add one more → Sibling set (~12.5% off).",
+      "upsell_family": "One more buddy → Family pack (~20% off, most chosen).",
+      "upsell_add": "+1 same buddy",
+      "cable_title": "Spare USB charging cable",
+      "cable_body": "Keep an extra cable in the kitchen drawer.",
+      "cable_add": "Add spare USB cable",
+      "cable_added": "Cable added",
+      "total": "Total",
+      "hint_bundles": "Sibling & Family sets unlock honest bundle savings.",
+      "hint_breezy": "Breezy set price guide: {{ amount }} (match with a Shopify discount at checkout).",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "each": "/ each",
+      "less": "Less",
+      "more": "More"
+    },
+    "sticky": {
+      "label": "Quick add to cart",
+      "cta": "Add to cart",
+      "busy": "Adding…"
+    },
+    "pdp": {
+      "eyebrow": "{{ animal }} · {{ group }}",
+      "choose_character": "Choose your character",
+      "choose_set": "Choose your set",
+      "atc": "Add to cart",
+      "atc_multi": "Add {{ count }} buddies to cart",
+      "note": "USB rechargeable · clips on mug & bowl · soft silicone clip",
+      "missing_variant": "This character is not linked to a Shopify product yet.",
+      "guarantee": "30-day money-back guarantee",
+      "reviews_word": "reviews"
+    },
+    "payments": {
+      "label": "Secure payments"
+    },
+    "early": {
+      "title": "Be one of our first families",
+      "body": "We're just getting started — real parent reviews will live here soon. Grab a buddy and help us write the first chapter.",
+      "cta": "Shop the crew"
     }
   }
 }

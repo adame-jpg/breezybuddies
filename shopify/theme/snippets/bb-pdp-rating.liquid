@@ -1,0 +1,29 @@
+{%- comment -%}
+  PDP aggregate rating between title and price.
+  Uses Shopify Product Reviews metafields when present.
+  No Judge.me / Loox / Yotpo snippets detected — stub stays empty (no fake counts).
+{%- endcomment -%}
+{%- liquid
+  assign bb_rating = product.metafields.reviews.rating.value.rating
+  assign bb_scale = product.metafields.reviews.rating.value.scale_max | default: 5
+  assign bb_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count
+-%}
+{%- if bb_rating != blank and bb_count != blank and bb_count > 0 -%}
+  <div
+    class="pdp-rating"
+    aria-label="{{ bb_rating }} out of {{ bb_scale }} stars, {{ bb_count }} reviews"
+  >
+    <span class="stars" aria-hidden="true">★★★★★</span>
+    <span class="rating-count">{{ bb_rating }} · {{ bb_count }} {{ 'bb.pdp.reviews_word' | t }}</span>
+  </div>
+{%- else -%}
+  <div
+    class="pdp-rating pdp-rating--stub"
+    data-bb-pdp-rating
+    data-product-id="{{ product.id }}"
+    hidden
+  >
+    <span class="stars" aria-hidden="true"></span>
+    <span class="rating-count"></span>
+  </div>
+{%- endif -%}

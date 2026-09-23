@@ -52,7 +52,7 @@
   --shadow: 0 10px 28px -14px rgb(40 37 45 / 22%);
   --shadow-lg: 0 26px 60px -28px rgb(40 37 45 / 30%);
 
-  --wrap: 1280px;
+  --wrap: 1140px;
   --header-h: 64px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

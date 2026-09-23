@@ -1,0 +1,25 @@
+{%- comment -%} Compact language switcher for BB chrome (EN default, NL supported) {%- endcomment -%}
+{%- if localization.available_languages.size > 1 -%}
+  {% form 'localization', id: 'bb-localization' %}
+    <label class="visually-hidden" for="bb-locale">{{ 'bb.lang.label' | t }}</label>
+    <select
+      id="bb-locale"
+      class="bb-lang"
+      name="locale_code"
+      onchange="this.form.submit()"
+    >
+      {% for language in localization.available_languages %}
+        <option
+          value="{{ language.iso_code }}"
+          {% if language.iso_code == localization.language.iso_code %}selected{% endif %}
+        >
+          {% if language.iso_code == 'nl' %}
+            {{ 'bb.lang.nl' | t }}
+          {% else %}
+            {{ language.endonym_name | default: language.iso_code }}
+          {% endif %}
+        </option>
+      {% endfor %}
+    </select>
+  {% endform %}
+{%- endif -%}

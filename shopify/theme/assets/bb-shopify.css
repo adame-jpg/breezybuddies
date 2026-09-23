@@ -1,5 +1,5 @@
 /* Shopify bridge — keep mockup look, tame Horizon chrome */
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -14,6 +14,7 @@ body {
 .bb-site {
   --header-h: 0px;
   overflow-x: clip;
+  padding-bottom: 5.5rem;
 }
 
 .bb-site a {
@@ -37,7 +38,7 @@ body:has(.bb-site) #MainContent {
 }
 
 .bb-announce {
-  background: linear-gradient(90deg, #ff6b8a, #a78bfa, #7ddbd0);
+  background: var(--coral, #ff6b8a);
   color: #fff;
   text-align: center;
   font-family: var(--font-body);
@@ -198,3 +199,93 @@ body:has(.bb-site) #MainContent {
   border: 0;
   cursor: pointer;
 }
+
+/* Premium primary CTA — scoped so soft/ghost buttons stay untouched */
+.bb-site .btn--primary,
+.bb-site .bb-sticky__cta,
+.bb-site .bb-pdp__atc,
+.bb-site .bb-cart__checkout {
+  background: linear-gradient(180deg, #ff7c97 0%, #f0506e 100%) !important;
+  border-radius: 999px;
+  border: 0;
+  color: #fff !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 6px 16px rgba(240, 80, 110, 0.35) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.bb-site .btn--primary:hover,
+.bb-site .bb-sticky__cta:hover,
+.bb-site .bb-pdp__atc:hover,
+.bb-site .bb-cart__checkout:hover {
+  transform: translateY(-2px);
+  filter: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 10px 22px rgba(240, 80, 110, 0.45) !important;
+}
+
+.bb-site .btn--primary:active,
+.bb-site .bb-sticky__cta:active,
+.bb-site .bb-pdp__atc:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 3px 10px rgba(240, 80, 110, 0.3) !important;
+}
+
+/* Solid H1 — no rainbow underline / gradient text */
+.bb-site .hero__title {
+  color: var(--ink, #28252d);
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  text-shadow: none;
+}
+
+.bb-site .hero__title::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Small uppercase labels — Nunito Sans (not Baloo 2) */
+.bb-site .eyebrow,
+.bb-site .bb-pdp__eyebrow,
+.bb-site .hero__eyebrow,
+.bb-site .sec-eyebrow,
+.bb-site .card__animal,
+.bb-site .bb-group-title,
+.bb-site .product-card__tag {
+  font-family: "Nunito Sans", var(--font-body, sans-serif) !important;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted, var(--ink-soft, #8a8a8a));
+}
+
+.bb-site .bb-group-title {
+  font-size: 0.78rem;
+  margin: 1.5rem 0 0.85rem;
+}
+
+.bb-site .product-card__tag {
+  font-size: 11px;
+  color: var(--ink, #28252d);
+}
+
+/* Prices — tabular Nunito Sans for scanability */
+.bb-site .price,
+.bb-site .bb-pdp__price,
+.bb-site .card__price,
+.bb-site .bb-bundle-card__price,
+.bb-site .bb-pdp__bundle-price,
+.bb-site .bb-sticky__price,
+.bb-site .bb-sticky__price strong,
+.bb-site .bb-cart__total-value {
+  font-family: "Nunito Sans", var(--font-body, sans-serif) !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+

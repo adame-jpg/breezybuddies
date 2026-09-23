@@ -1,0 +1,104 @@
+{%- comment -%}
+  Shared Family A character catalog + i18n strings for BB commerce JS.
+{%- endcomment -%}
+{%- liquid
+  assign handles = 'mochi,coco,ellie,mango,chili,bao,dino-mint,dino-grape,flip,blossom' | split: ','
+  assign names = 'Mochi Cat,Coco Pup,Ellie Elephant,Mango Monkey,Chili Red Panda,Bao Panda,Dino Mint,Dino Grape,Flip Frog,Blossom Bunny' | split: ','
+  assign accents = '#ffd85a,#f5a54a,#7ddbd0,#ff6b8a,#ff8a5b,#c4b8a8,#8ed081,#a78bfa,#8CC63F,#E95E8A' | split: ','
+  assign softs = '#fff4d0,#ffeed8,#e2f7f4,#ffe3ea,#ffe8de,#f5f1ea,#e7f5e3,#ede7ff,#e9f6d8,#ffe3ea' | split: ','
+  assign imgs = 'bb-mochi.webp,bb-coco.webp,bb-ellie.webp,bb-coco.webp,bb-ellie.webp,bb-ellie.webp,bb-dino-mint.webp,bb-dino-grape.webp,bb-dino-mint.webp,bb-mochi.webp' | split: ','
+  assign groups = 'pets,pets,zoo,zoo,zoo,zoo,dinos,dinos,cartoons,cartoons' | split: ','
+  assign animal_keys = 'cat,dog,elephant,monkey,red_panda,panda,dino,dino,frog,bunny' | split: ','
+  assign badges = ', ,most_picked,new,new, , ,new,new,new' | split: ','
+-%}
+<script type="application/json" id="bb-characters-data">
+[
+{%- for handle in handles -%}
+  {%- assign i = forloop.index0 -%}
+  {%- assign product = all_products[handle] -%}
+  {%- assign variant_id = blank -%}
+  {%- assign product_url = blank -%}
+  {%- assign shop_price = 1995 -%}
+  {%- assign image_url = imgs[i] | asset_url -%}
+  {%- assign display_name = names[i] -%}
+  {%- if product != blank -%}
+    {%- assign variant_id = product.selected_or_first_available_variant.id -%}
+    {%- assign product_url = product.url -%}
+    {%- assign shop_price = product.price -%}
+    {%- assign display_name = product.title -%}
+    {%- if product.featured_image -%}
+      {%- assign image_url = product.featured_image | image_url: width: 900 -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign animal_t = 'bb.animals.' | append: animal_keys[i] -%}
+  {%- assign badge_raw = badges[i] | strip -%}
+  {%- assign badge_label = '' -%}
+  {%- if badge_raw != blank -%}
+    {%- assign badge_t = 'bb.badges.' | append: badge_raw -%}
+    {%- assign badge_label = badge_t | t -%}
+  {%- endif -%}
+  {
+    "id": {{ handle | json }},
+    "name": {{ display_name | json }},
+    "animal": {{ animal_t | t | json }},
+    "group": {{ groups[i] | json }},
+    "groupLabel": {{ 'bb.groups.' | append: groups[i] | t | json }},
+    "accent": {{ accents[i] | json }},
+    "soft": {{ softs[i] | json }},
+    "badge": {{ badge_label | json }},
+    "image": {{ image_url | json }},
+    "variantId": {% if variant_id != blank %}{{ variant_id }}{% else %}null{% endif %},
+    "url": {{ product_url | json }},
+    "priceCents": {{ shop_price }}
+  }{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+]
+</script>
+<script type="application/json" id="bb-commerce-config">
+{
+  "locale": {{ localization.language.iso_code | json }},
+  "unitPriceCents": 1995,
+  "currency": {{ cart.currency.iso_code | json }},
+  "moneyFormat": {{ shop.money_format | json }},
+  "freeShipUnits": 3,
+  "cartUrl": {{ routes.cart_url | json }},
+  "cartAddUrl": {{ routes.cart_add_url | json }},
+  "cartChangeUrl": {{ routes.cart_change_url | json }},
+  "cartUpdateUrl": {{ routes.cart_update_url | json }},
+  "cartJsUrl": "{{ routes.cart_url }}.js",
+  "bundles": [
+    { "id": "single", "units": 1, "discount": 0, "label": {{ 'bb.bundles.single_title' | t | json }}, "sub": {{ 'bb.bundles.single_sub' | t | json }}, "popular": false },
+    { "id": "duo", "units": 2, "discount": 0.125, "label": {{ 'bb.bundles.duo_title' | t | json }}, "sub": {{ 'bb.bundles.duo_sub' | t | json }}, "popular": false },
+    { "id": "family", "units": 3, "discount": 0.2, "label": {{ 'bb.bundles.family_title' | t | json }}, "sub": {{ 'bb.bundles.family_sub' | t | json }}, "popular": true }
+  ],
+  "i18n": {
+    "stickyCta": {{ 'bb.sticky.cta' | t | json }},
+    "stickyBusy": {{ 'bb.sticky.busy' | t | json }},
+    "pdpAtc": {{ 'bb.pdp.atc' | t | json }},
+    "pdpAtcMulti": {{ 'bb.pdp.atc_multi' | t | json }},
+    "pdpMissing": {{ 'bb.pdp.missing_variant' | t | json }},
+    "pdpEyebrow": {{ 'bb.pdp.eyebrow' | t | json }},
+    "save": {{ 'bb.bundles.save' | t | json }},
+    "familyTag": {{ 'bb.bundles.family_tag' | t | json }},
+    "cartEmptyTitle": {{ 'bb.cart.empty_title' | t | json }},
+    "cartEmptyBody": {{ 'bb.cart.empty_body' | t | json }},
+    "cartChoose": {{ 'bb.cart.choose' | t | json }},
+    "cartShipOne": {{ 'bb.cart.ship_need_one' | t | json }},
+    "cartShipOther": {{ 'bb.cart.ship_need_other' | t | json }},
+    "cartShipDone": {{ 'bb.cart.ship_done' | t | json }},
+    "cartUpsellDuo": {{ 'bb.cart.upsell_duo' | t | json }},
+    "cartUpsellFamily": {{ 'bb.cart.upsell_family' | t | json }},
+    "cartHintBundles": {{ 'bb.cart.hint_bundles' | t | json }},
+    "cartHintBreezy": {{ 'bb.cart.hint_breezy' | t | json }},
+    "cartRemove": {{ 'bb.cart.remove' | t | json }},
+    "cartEach": {{ 'bb.cart.each' | t | json }},
+    "cartLess": {{ 'bb.cart.less' | t | json }},
+    "cartMore": {{ 'bb.cart.more' | t | json }},
+    "cableAdded": {{ 'bb.cart.cable_added' | t | json }},
+    "proofToddlers": {{ 'bb.shop.proof_toddlers' | t | json }},
+    "certBpa": {{ 'bb.cert.bpa' | t | json }},
+    "certRotor": {{ 'bb.cert.rotor' | t | json }},
+    "certUsb": {{ 'bb.cert.usb' | t | json }}
+  }
+}
+</script>

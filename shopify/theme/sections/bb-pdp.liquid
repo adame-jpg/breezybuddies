@@ -1,0 +1,208 @@
+{{ 'bb-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'bb-base.css' | asset_url | stylesheet_tag }}
+{{ 'bb-components.css' | asset_url | stylesheet_tag }}
+{{ 'bb-commerce.css' | asset_url | stylesheet_tag }}
+{{ 'bb-shopify.css' | asset_url | stylesheet_tag }}
+
+{% render 'bb-characters-json' %}
+
+<div class="bb-site bb-pdp-page" lang="{{ localization.language.iso_code }}">
+  <header class="bb-nav">
+    <div class="bb-nav__inner">
+      <a class="bb-nav__brand" href="{{ routes.root_url }}">
+        <img src="{{ 'bb-logo-circle.png' | asset_url }}" width="42" height="42" alt="{{ 'bb.brand' | t }}">
+        {{ 'bb.brand' | t }}
+      </a>
+      <nav class="bb-nav__links" aria-label="{{ 'bb.nav.primary' | t }}">
+        <a href="{{ routes.root_url }}#shop">{{ 'bb.nav.shop' | t }}</a>
+        <a href="{{ routes.root_url }}#how">{{ 'bb.nav.how' | t }}</a>
+        <a href="{{ routes.root_url }}#faq">{{ 'bb.nav.faq' | t }}</a>
+      </nav>
+      <div class="bb-nav__actions">
+        <button type="button" class="bb-nav__cart-btn" data-bb-open-cart>
+          {{ 'bb.nav.cart' | t }}
+          <span class="bb-nav__cart-count" data-bb-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  {%- liquid
+    assign handles = 'mochi,coco,ellie,mango,chili,bao,dino-mint,dino-grape,flip,blossom' | split: ','
+    assign names = 'Mochi Cat,Coco Pup,Ellie Elephant,Mango Monkey,Chili Red Panda,Bao Panda,Dino Mint,Dino Grape,Flip Frog,Blossom Bunny' | split: ','
+    assign accents = '#ffd85a,#f5a54a,#7ddbd0,#ff6b8a,#ff8a5b,#c4b8a8,#8ed081,#a78bfa,#8CC63F,#E95E8A' | split: ','
+    assign softs = '#fff4d0,#ffeed8,#e2f7f4,#ffe3ea,#ffe8de,#f5f1ea,#e7f5e3,#ede7ff,#e9f6d8,#ffe3ea' | split: ','
+    assign imgs = 'bb-mochi.webp,bb-coco.webp,bb-ellie.webp,bb-coco.webp,bb-ellie.webp,bb-ellie.webp,bb-dino-mint.webp,bb-dino-grape.webp,bb-dino-mint.webp,bb-mochi.webp' | split: ','
+    assign groups = 'pets,pets,zoo,zoo,zoo,zoo,dinos,dinos,cartoons,cartoons' | split: ','
+    assign animal_keys = 'cat,dog,elephant,monkey,red_panda,panda,dino,dino,frog,bunny' | split: ','
+    assign current_handle = product.handle
+    assign match_index = 0
+    for handle in handles
+      if handle == current_handle
+        assign match_index = forloop.index0
+        break
+      endif
+    endfor
+    assign animal_label = 'bb.animals.' | append: animal_keys[match_index] | t
+    assign group_label = 'bb.groups.' | append: groups[match_index] | t
+  -%}
+
+  <section
+    id="bb-pdp"
+    class="bb-pdp"
+    style="--soft:{{ softs[match_index] }};--accent:{{ accents[match_index] }}"
+    data-initial-character="{{ handles[match_index] }}"
+  >
+    <div class="bb-pdp__wrap">
+      <div>
+        <div class="bb-pdp__stage">
+          <span id="bb-pdp-badge" class="bb-pdp__badge" hidden></span>
+          <img
+            id="bb-pdp-stage-img"
+            class="bb-pdp__stage-img"
+            src="{% if product.featured_image %}{{ product.featured_image | image_url: width: 900 }}{% else %}{{ imgs[match_index] | asset_url }}{% endif %}"
+            width="700"
+            height="700"
+            alt="{{ product.title | escape }}"
+            fetchpriority="high"
+          >
+        </div>
+        <div id="bb-pdp-thumbs" class="bb-pdp__thumbs" aria-label="{{ 'bb.pdp.choose_character' | t }}"></div>
+      </div>
+
+      <div>
+        <p id="bb-pdp-eyebrow" class="bb-pdp__eyebrow eyebrow">{{ 'bb.pdp.eyebrow' | t: animal: animal_label, group: group_label }}</p>
+        <h1 id="bb-pdp-title" class="bb-pdp__title">{{ product.title }}</h1>
+        {% render 'bb-pdp-rating', product: product %}
+
+        <div class="bb-pdp__price-row">
+          <p id="bb-pdp-price" class="bb-pdp__price price">{{ product.price | money }}</p>
+          <span id="bb-pdp-save" class="bb-pdp__save" hidden></span>
+        </div>
+
+        <ul class="bb-pdp__proof">
+          <li>{{ 'bb.shop.proof_toddlers' | t }}</li>
+          <li>{{ 'bb.cert.bpa' | t }}</li>
+          <li>{{ 'bb.cert.usb' | t }}</li>
+        </ul>
+
+        <p class="bb-pdp__label">{{ 'bb.pdp.choose_character' | t }}</p>
+        <div class="bb-pdp__swatches" role="group" aria-label="{{ 'bb.pdp.choose_character' | t }}">
+          {% for handle in handles %}
+            {% assign i = forloop.index0 %}
+            {% assign p = all_products[handle] %}
+            <button
+              type="button"
+              class="bb-pdp__swatch character-swatch"
+              data-bb-swatch="{{ handle }}"
+              aria-pressed="{% if handle == current_handle %}true{% else %}false{% endif %}"
+              aria-label="{{ names[i] }}"
+              title="{{ names[i] }}"
+              style="--swatch:{{ softs[i] }}"
+              {% if p != blank and p.url %}
+                data-bb-product-url="{{ p.url }}"
+              {% endif %}
+            >
+              <img
+                src="{% if p.featured_image %}{{ p.featured_image | image_url: width: 120 }}{% else %}{{ imgs[i] | asset_url }}{% endif %}"
+                alt=""
+                width="52"
+                height="52"
+                loading="lazy"
+              >
+            </button>
+          {% endfor %}
+        </div>
+
+        <p class="bb-pdp__label">{{ 'bb.pdp.choose_set' | t }}</p>
+        <div class="bb-pdp__bundles" role="group" aria-label="{{ 'bb.pdp.choose_set' | t }}">
+          <button type="button" class="bb-pdp__bundle" data-bb-pdp-bundle="single" aria-pressed="false">
+            <span class="bb-pdp__bundle-radio" aria-hidden="true"></span>
+            <span>
+              <p class="bb-pdp__bundle-title">{{ 'bb.bundles.single_title' | t }}</p>
+              <p class="bb-pdp__bundle-sub">{{ 'bb.bundles.single_sub' | t }}</p>
+            </span>
+            <span class="bb-pdp__bundle-price price">€19.95</span>
+          </button>
+          <button type="button" class="bb-pdp__bundle" data-bb-pdp-bundle="duo" aria-pressed="false">
+            <span class="bb-pdp__bundle-radio" aria-hidden="true"></span>
+            <span>
+              <p class="bb-pdp__bundle-title">{{ 'bb.bundles.duo_title' | t }}</p>
+              <p class="bb-pdp__bundle-sub">{{ 'bb.bundles.duo_sub' | t }}</p>
+            </span>
+            <span class="bb-pdp__bundle-price price">€34.91</span>
+          </button>
+          <button type="button" class="bb-pdp__bundle" data-bb-pdp-bundle="family" aria-pressed="true">
+            <span class="bb-pdp__bundle-radio" aria-hidden="true"></span>
+            <span>
+              <p class="bb-pdp__bundle-title">{{ 'bb.bundles.family_title' | t }}</p>
+              <p class="bb-pdp__bundle-sub">{{ 'bb.bundles.family_sub' | t }}</p>
+              <span class="bb-pdp__bundle-tag">{{ 'bb.bundles.family_tag' | t }}</span>
+              <span class="tier-tag tier-tag--shipping">{{ 'bb.bundles.free_shipping_tag' | t }}</span>
+            </span>
+            <span class="bb-pdp__bundle-price price">€47.88</span>
+          </button>
+        </div>
+
+        <button type="button" id="bb-pdp-atc" class="bb-pdp__atc">{{ 'bb.pdp.atc' | t }}</button>
+        <div class="pdp-guarantee">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          <span>{{ 'bb.pdp.guarantee' | t }}</span>
+        </div>
+        <p class="bb-pdp__note">{{ 'bb.pdp.note' | t }}</p>
+        {% render 'bb-trust-badges' %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white" id="faq">
+    <div class="wrap wrap--narrow bb-compact">
+      <header class="sec-head">
+        <h2 class="sec-title">{{ 'bb.faq.title' | t }}</h2>
+        <p class="sec-sub">{{ 'bb.faq.sub' | t }}</p>
+      </header>
+      {% render 'bb-faq-trust', mode: 'faq' %}
+    </div>
+  </section>
+
+  <section class="section section--cream" id="trust">
+    <div class="wrap wrap--narrow bb-compact">
+      <header class="sec-head">
+        <h2 class="sec-title">{{ 'bb.trust.title' | t }}</h2>
+      </header>
+      {% render 'bb-faq-trust', mode: 'trust' %}
+    </div>
+  </section>
+</div>
+
+{% render 'bb-sticky-quick-add' %}
+{% render 'bb-cart-drawer' %}
+<script src="{{ 'bb-commerce.js' | asset_url }}" defer></script>
+<script>
+  (function () {
+    var pdp = document.getElementById('bb-pdp');
+    var initial = pdp && pdp.getAttribute('data-initial-character');
+    document.addEventListener('click', function (e) {
+      var sw = e.target.closest('[data-bb-swatch][data-bb-product-url]');
+      if (!sw) return;
+      var url = sw.getAttribute('data-bb-product-url');
+      var id = sw.getAttribute('data-bb-swatch');
+      if (url && id && id !== initial) {
+        window.location.href = url;
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "BB PDP Showcase",
+  "tag": "section",
+  "class": "bb-pdp-section",
+  "settings": [],
+  "presets": [{ "name": "BB PDP Showcase" }]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{%- comment -%}
+  FAQ accordion + Parent trust grid — fully translated via bb.* keys.
+  @param {string} [mode] - "faq" | "trust" | "both"
+{%- endcomment -%}
+{%- assign mode = mode | default: 'both' -%}
+
+{%- if mode == 'faq' or mode == 'both' -%}
+  <div class="bb-faq">
+    <details class="bb-faq__item">
+      <summary>{{ 'bb.faq.q1' | t }}<span class="bb-faq__chev" aria-hidden="true">+</span></summary>
+      <div class="bb-faq__answer"><p>{{ 'bb.faq.a1' | t }}</p></div>
+    </details>
+    <details class="bb-faq__item">
+      <summary>{{ 'bb.faq.q2' | t }}<span class="bb-faq__chev" aria-hidden="true">+</span></summary>
+      <div class="bb-faq__answer"><p>{{ 'bb.faq.a2' | t }}</p></div>
+    </details>
+    <details class="bb-faq__item">
+      <summary>{{ 'bb.faq.q3' | t }}<span class="bb-faq__chev" aria-hidden="true">+</span></summary>
+      <div class="bb-faq__answer"><p>{{ 'bb.faq.a3' | t }}</p></div>
+    </details>
+    <details class="bb-faq__item">
+      <summary>{{ 'bb.faq.q4' | t }}<span class="bb-faq__chev" aria-hidden="true">+</span></summary>
+      <div class="bb-faq__answer"><p>{{ 'bb.faq.a4' | t }}</p></div>
+    </details>
+    <details class="bb-faq__item">
+      <summary>{{ 'bb.faq.q5' | t }}<span class="bb-faq__chev" aria-hidden="true">+</span></summary>
+      <div class="bb-faq__answer"><p>{{ 'bb.faq.a5' | t }}</p></div>
+    </details>
+  </div>
+{%- endif -%}
+
+{%- if mode == 'trust' or mode == 'both' -%}
+  <div class="bb-trust">
+    <article class="bb-trust__item">
+      <div class="bb-trust__icon" aria-hidden="true">🛡️</div>
+      <h3>{{ 'bb.trust.safe_title' | t }}</h3>
+      <p>{{ 'bb.trust.safe_body' | t }}</p>
+    </article>
+    <article class="bb-trust__item">
+      <div class="bb-trust__icon" aria-hidden="true">🔌</div>
+      <h3>{{ 'bb.trust.usb_title' | t }}</h3>
+      <p>{{ 'bb.trust.usb_body' | t }}</p>
+    </article>
+    <article class="bb-trust__item">
+      <div class="bb-trust__icon" aria-hidden="true">🌍</div>
+      <h3>{{ 'bb.trust.ship_title' | t }}</h3>
+      <p>{{ 'bb.trust.ship_body' | t }}</p>
+    </article>
+    <article class="bb-trust__item">
+      <div class="bb-trust__icon" aria-hidden="true">💬</div>
+      <h3>{{ 'bb.trust.support_title' | t }}</h3>
+      <p>{{ 'bb.trust.support_body' | t }}</p>
+    </article>
+  </div>
+  <p class="bb-trust__disclaimer">{{ 'bb.trust.disclaimer' | t }}</p>
+{%- endif -%}
